@@ -11,6 +11,8 @@
         'consistent-return': 0,
         'max-len': 0,
         'comma-dangle': 0,
+        'func-names': 'off',
+        'class-methods-use-this': 'off',
         'import/no-unresolved': 'off',
         'import/no-dynamic-require': 'off',
         'no-underscore-dangle': 'off',

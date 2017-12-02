@@ -23,10 +23,17 @@ app.use(require('webpack-hot-middleware')(compiler, {
 }));
 
 app.get('/colors', (req, res) => {
-    Extractor.extract('https://cdn.dribbble.com/users/1761489/screenshots/3978268/mujer_1x.jpg')
-        .then((colors) => {
-            dribbble.getShots();
-            res.send(colors.map(color => color.hex()));
+    dribbble.getShots()
+        .then((shots) => {
+            const shotsData = shots.map(shot => Extractor.extractData(shot));
+
+            Promise.all(shotsData).then((e) => {
+                // console.log(e[0]);
+                // const colorList = [].concat(...e);
+                // console.log(colorList);
+                res.send(e);
+                // res.send(colorList.map(color => color.hex()));
+            });
         });
 });
 

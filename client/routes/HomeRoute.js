@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import LandingContainer from '../containers/Landing';
+import Homepage from '../containers/Homepage';
 
 const HomeRoute = () => (
-    <Route exact path="/" component={LandingContainer} />
+    <Route exact path="/" component={Homepage} />
 );
 
 export default HomeRoute;
