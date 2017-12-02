@@ -1,9 +1,12 @@
 import express from 'express';
 import Webpack from 'webpack';
+import Extractor from './Extractor';
+import Dribbble from './Dribbble';
 
 const config = require('../webpack.config.client');
 const path = require('path');
 
+const dribbble = new Dribbble();
 const app = express();
 const compiler = Webpack(config);
 app.use(express.static('static'));
@@ -19,11 +22,12 @@ app.use(require('webpack-hot-middleware')(compiler, {
     heartbeat: 10 * 1000
 }));
 
-
-app.get('/api', (req, res) => {
-    res.send({
-        message: 'You can also access routes defined in Express.'
-    });
+app.get('/colors', (req, res) => {
+    Extractor.extract('https://cdn.dribbble.com/users/1761489/screenshots/3978268/mujer_1x.jpg')
+        .then((colors) => {
+            dribbble.getShots();
+            res.send(colors.map(color => color.hex()));
+        });
 });
 
 app.get('*', (req, res) => {
