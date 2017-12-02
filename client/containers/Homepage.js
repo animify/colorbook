@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import request from './../modules/Request';
 
 const ColorBlock = ({ shot }) => (
-    <div className="color-block">
-        {shot.colors.map(color => (
-            <div className="color" key={color.substring(1)}>
-                <span style={{ backgroundColor: color }} />
-                <p>{ color }</p>
+    <div className="col xs-12 color-col">
+        <div className="color-block">
+            <div className="description">
+                <h4>{ shot.title }</h4>
+                <a href={shot.user_url}>@{ shot.user_name }</a>
             </div>
-        ))}
-        <a href={shot.imageUrl}>Go to shot</a>
+            <div className="colors">
+                {shot.colors.map(color => (
+                    <div className="color" key={color.substring(1)}>
+                        <span style={{ backgroundColor: color }} />
+                        <p>{ color }</p>
+                    </div>
+                ))}
+            </div>
+            {/* <a href={shot.url}>Go to shot</a> */}
+        </div>
     </div>
 );
 
@@ -53,7 +61,9 @@ class Homepage extends React.Component {
 
         return (
             <section className="contain">
-                {colorBlocks}
+                <div className="row">
+                    {colorBlocks}
+                </div>
             </section>
         );
     }
@@ -63,6 +73,9 @@ ColorBlock.propTypes = {
     shot: PropTypes.shape({
         id: PropTypes.number,
         imageUrl: PropTypes.string,
+        url: PropTypes.string,
+        user_name: PropTypes.string,
+        user_url: PropTypes.string,
         colors: PropTypes.arrayOf(PropTypes.string)
     }).isRequired
 };
