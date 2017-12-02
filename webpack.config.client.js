@@ -7,7 +7,7 @@ const rupture = require('rupture');
 module.exports = {
     entry: [
         'react-hot-loader/patch',
-        'webpack-hot-middleware/client?http://0.0.0.0:3000/',
+        'webpack-hot-middleware/client?http://0.0.0.0:3001/',
         'webpack/hot/only-dev-server',
         './client/index.js',
     ],
@@ -58,7 +58,7 @@ module.exports = {
 
     devServer: {
         host: 'localhost',
-        port: 3000,
+        port: 3001,
         historyApiFallback: true,
         hot: true,
     },
