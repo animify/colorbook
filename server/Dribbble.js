@@ -20,14 +20,6 @@ class Dribbble {
         return `${this.apiUrl}/${endpoint}?${query}`;
     }
 
-    saveData() {
-        console.log('saving data');
-        ['2017-11-29', '2017-11-30', '2017-12-01'].forEach((date) => {
-            console.log(date);
-            this.saveShotsByDate(date);
-        });
-    }
-
     saveShotsByDate(date) {
         return new Promise((resolve, reject) => {
             this.getShots({ date })
@@ -78,8 +70,6 @@ class Dribbble {
 
     getShots(params = {}) {
         const apiUrl = this.buildUrl('shots', params);
-
-        console.log(apiUrl);
 
         return new Promise(((resolve) => {
             needle

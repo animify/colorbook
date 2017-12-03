@@ -1,6 +1,3 @@
-import Helpers from './common/helpers';
-import Extractor from './Extractor';
-
 class Endpoint {
     constructor(db, dribbble) {
         this.db = db;
@@ -11,7 +8,6 @@ class Endpoint {
         return new Promise((resolve, reject) => {
             const popularShots = this.db.shots.get('popular');
             const shotsLength = popularShots.size().value();
-            console.log(popularShots, shotsLength);
 
             if (shotsLength === 0) {
                 this.dribbble
@@ -38,7 +34,6 @@ class Endpoint {
         return new Promise((resolve, reject) => {
             const datedShots = this.db.shots.get(date);
             const shotsLength = datedShots.size().value();
-            console.log(datedShots, shotsLength);
 
             if (shotsLength === 0) {
                 this.dribbble

@@ -14,8 +14,6 @@ const endpoint = new Endpoint(db, dribbble);
 const app = express();
 const compiler = Webpack(config);
 
-// dribbble.saveData();
-
 app.use(express.static('static'));
 
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -44,27 +42,6 @@ app.get('/api/timeline/:date', (req, res) => {
         .getShotsByDate(date)
         .then((shotsObject) => {
             res.send(shotsObject);
-        });
-});
-
-app.get('/colors', (req, res) => {
-    const params = {
-        date: '2017-12-01'
-    };
-
-    const defaultParams = Object.assign({}, params);
-
-    dribbble.getShots(params)
-        .then((shots) => {
-            Extractor.extractShots(shots)
-                .then((extractedShots) => {
-                    const response = {
-                        data: extractedShots,
-                        params: defaultParams
-                    };
-
-                    res.send(response);
-                });
         });
 });
 
