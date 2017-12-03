@@ -1,4 +1,5 @@
 import needle from 'needle';
+import moment from 'moment';
 import querystring from 'querystring';
 
 import Helpers from './common/helpers';
@@ -52,7 +53,7 @@ class Dribbble {
                         .then((extractedShots) => {
                             const popularShots = {
                                 shots: extractedShots,
-                                date: new Date()
+                                date: moment().format()
                             };
 
                             this.db.shots

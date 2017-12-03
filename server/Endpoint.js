@@ -1,3 +1,5 @@
+import Helpers from './common/helpers';
+
 class Endpoint {
     constructor(db, dribbble) {
         this.db = db;
@@ -8,8 +10,9 @@ class Endpoint {
         return new Promise((resolve, reject) => {
             const popularShots = this.db.shots.get('popular');
             const shotsLength = popularShots.size().value();
+            const shouldResave = shotsLength === 0 || popularShots.value() === undefined || Helpers.lessThanOneHourAgo(popularShots.value().date);
 
-            if (shotsLength === 0) {
+            if (shouldResave) {
                 this.dribbble
                     .savePopularShots()
                     .then((shots) => {

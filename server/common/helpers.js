@@ -1,5 +1,6 @@
 import yaml from 'js-yaml';
 import fs from 'fs';
+import moment from 'moment';
 
 class Helpers {
     static get config() {
@@ -12,6 +13,10 @@ class Helpers {
             status,
             message
         };
+    }
+
+    static lessThanOneHourAgo(date) {
+        return moment(date).isBefore(moment().subtract(1, 'hours'));
     }
 }
 
