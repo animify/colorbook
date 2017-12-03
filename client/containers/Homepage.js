@@ -5,14 +5,14 @@ import request from './../modules/Request';
 
 const Intro = () => (
     <div className="content-intro">
-        <small>Colorbook</small>
+        <small>The Colorbook</small>
         <h2>The latest &amp; most popular color palettes on Dribbble.</h2>
     </div>
 );
 
 const DateTitle = ({ date }) => {
     const nativeDate = new Date(date);
-    const formatedDate = moment(nativeDate).format('LL');
+    const formatedDate = moment(nativeDate).format('dddd, MMMM Do');
 
     return (
         <h5 className="date">{formatedDate}</h5>
