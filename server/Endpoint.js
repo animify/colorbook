@@ -18,6 +18,9 @@ class Endpoint {
                     .savePopularShots()
                     .then((shots) => {
                         resolve(shots);
+                    })
+                    .catch((errObject) => {
+                        reject(errObject);
                     });
             } else {
                 resolve(popularShots);

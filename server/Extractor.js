@@ -1,11 +1,16 @@
-const getColors = require('get-image-colors');
+import getColors from 'get-image-colors';
+import Helpers from './common/helpers';
 
 class Extractor {
     static extractColor(filepath) {
-        return new Promise(((resolve) => {
-            getColors(filepath).then((colors) => {
-                resolve(colors);
-            });
+        return new Promise(((resolve, reject) => {
+            getColors(filepath)
+                .then((colors) => {
+                    resolve(colors);
+                })
+                .catch((err) => {
+                    reject(Helpers.buildError(400, `Error retreiving colors on image. Details: ${err}`));
+                });
         }));
     }
 
@@ -26,11 +31,14 @@ class Extractor {
             colors: []
         };
 
-        return new Promise(((resolve) => {
+        return new Promise(((resolve, reject) => {
             Extractor.extractColor(normalizedData.imageUrl)
                 .then((colors) => {
                     normalizedData.colors = colors.map(color => color.hex());
                     resolve(normalizedData);
+                })
+                .catch((err) => {
+                    reject(Helpers.buildError(400, `Error extracting data from shot. Details: ${err}`));
                 });
         }));
     }

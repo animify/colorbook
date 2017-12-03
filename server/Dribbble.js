@@ -12,7 +12,6 @@ class Dribbble {
     }
 
     buildUrl(endpoint, queryObject) {
-        console.log(this.config);
         const tokenedObject = Object.assign(queryObject, {
             access_token: this.config.keys.dribbble_token
         });
@@ -30,17 +29,22 @@ class Dribbble {
     }
 
     saveShotsByDate(date) {
-        this.getShots({ date })
-            .then((shots) => {
-                Extractor.extractShots(shots)
-                    .then((extractedShots) => {
-                        const datedShots = Object.assign(extractedShots, {
-                            date: new Date(date)
-                        });
+        return new Promise((resolve, reject) => {
+            this.getShots({ date })
+                .then((shots) => {
+                    Extractor.extractShots(shots)
+                        .then((extractedShots) => {
+                            const datedShots = Object.assign(extractedShots, {
+                                date: new Date(date)
+                            });
 
-                        this.db.shots.set(date, datedShots).write();
-                    });
-            });
+                            this.db.shots.set(date, datedShots).write();
+                        })
+                        .catch((errObject) => {
+                            reject(errObject);
+                        });
+                });
+        });
     }
 
     savePopularShots() {
@@ -57,8 +61,10 @@ class Dribbble {
                             this.db.shots
                                 .set('popular', popularShots)
                                 .write();
-                                
                             resolve(popularShots);
+                        })
+                        .catch((errObject) => {
+                            reject(errObject);
                         });
                 });
         });
@@ -68,6 +74,7 @@ class Dribbble {
         const apiUrl = this.buildUrl('shots', params);
 
         console.log(apiUrl);
+
         return new Promise(((resolve) => {
             needle
                 .get(apiUrl, (error, response) => {
