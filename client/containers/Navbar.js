@@ -19,9 +19,9 @@ class Navbar extends React.Component {
                 <div className="contain">
                     <div className="row">
                         <div className="xs-12">
-                            <ul className="list horizontal">
+                            <ul className="list horizontal float-right">
                                 <li>
-                                    <a>Popular</a>
+                                    <a>Latest</a>
                                 </li>
                                 <li>
                                     <a>By date</a>

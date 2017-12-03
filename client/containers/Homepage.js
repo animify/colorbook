@@ -27,13 +27,13 @@ const ColorBlock = ({ shot }) => (
                     <img className="avatar" src={shot.user_avatar} height="52" alt={shot.user_name} />
                 </div>
                 <div className="inline">
-                    <h4><a href={shot.url}>{ shot.title }</a></h4>
+                    <h5><a href={shot.url}>{ shot.title }</a></h5>
                     <a href={shot.user_url}>@{ shot.user_name }</a>
                 </div>
             </div>
             <div className="colors">
                 {shot.colors.map(color => (
-                    <div className="color" key={color.substring(1)}>
+                    <div className="color tooltip dark" key={color.substring(1)} data-content={color} data-position="bottom right" data-text="small">
                         <span style={{ backgroundColor: color }} />
                         <p>{ color }</p>
                     </div>

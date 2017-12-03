@@ -14,7 +14,6 @@ dark-tooltip-color = color-ash
     box-shadow 1px 1px 0 0 border-grey
     transform-origin center top
     transform rotate(45deg) scale(0)
-    transition all cubic-bezier(0.02, 0.49, 0.01, 0.97) .14s
     opacity 0
   &:after
     content attr(data-content)
@@ -31,9 +30,11 @@ dark-tooltip-color = color-ash
     padding .75em 1em
     box-shadow 0 1px 2px 0 box-shadow-grey
     transform scale(0)
-    transition all cubic-bezier(0.02, 0.49, 0.01, 0.97) .14s
     cursor default
     pointer-events none
+  &:hover
+    &:before, &:after
+      transition all cubic-bezier(0.02, 0.49, 0.01, 0.97) .14s
   for size in ('tiny' 'small' 'medium' 'large' 'big')
     &[data-text={size}]
       &:after
