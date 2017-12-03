@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoImage from '../images/logo.png';
+import primaryLogo from '../images/colorbook-logo-primary.svg';
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Navbar extends React.Component {
     render() {
         return (
             <nav>
-                <img src={logoImage} alt="Colorbook logo" height="36" />
+                <img src={primaryLogo} alt="Colorbook primary logo" height="36" />
                 <ul className="list horizontal float-right">
                     <li>
                         <Link to="/">Latest</Link>
