@@ -6,8 +6,13 @@ const ColorBlock = ({ shot }) => (
     <div className="col xs-12 color-col">
         <div className="color-block">
             <div className="description">
-                <h4>{ shot.title }</h4>
-                <a href={shot.user_url}>@{ shot.user_name }</a>
+                <div className="inline">
+                    <img className="avatar" src={shot.user_avatar} height="52" alt={shot.user_name} />
+                </div>
+                <div className="inline">
+                    <h4>{ shot.title }</h4>
+                    <a href={shot.user_url}>@{ shot.user_name }</a>
+                </div>
             </div>
             <div className="colors">
                 {shot.colors.map(color => (

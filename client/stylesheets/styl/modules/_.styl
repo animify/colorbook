@@ -3,16 +3,24 @@
         border-top 1px solid border-grey
 
 .color-block
-    padding 2.6rem 0
+    padding 2.4rem 0
     border-radius border-radius-normal
     display flex
+    .avatar
+        border-radius border-radius-normal
+        margin-right 1.5rem
+        absolute left top
     // justify-content space-between
     .description
+        position relative
+        padding-left 4.5rem
         h4
             line-height 1em
-            margin-bottom .6rem
+            margin-bottom .4rem
         a
-            color text-disabled
+            color text-default
+            &:hover
+                color color-primary
     .colors
         display flex
         margin-left auto

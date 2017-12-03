@@ -38,6 +38,10 @@ module.exports = {
                         loader: 'stylus-loader'
                     },
                 ],
+            },
+            {
+                test: /\.(png|eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader'
             }
         ],
     },

@@ -60,3 +60,4 @@ typings/
 .env
 server/configs/config.yml
 bash.exe.stackdump
+client/stylesheets/styl/fonts/*
