@@ -2,6 +2,7 @@ import needle from 'needle';
 import querystring from 'querystring';
 
 import Helpers from './common/helpers';
+import Extractor from './Extractor';
 
 class Dribbble {
     constructor(db) {
@@ -22,22 +23,48 @@ class Dribbble {
 
     saveData() {
         console.log('saving data');
-        ['2017-11-30', '2017-12-01'].forEach((date) => {
+        ['2017-11-29', '2017-11-30', '2017-12-01'].forEach((date) => {
             console.log(date);
             this.saveShotsByDate(date);
         });
     }
 
     saveShotsByDate(date) {
-        this.getShots({
-            date
-        }).then((shots) => {
-            this.db.shots.set(date, shots).write();
+        this.getShots({ date })
+            .then((shots) => {
+                Extractor.extractShots(shots)
+                    .then((extractedShots) => {
+                        const datedShots = Object.assign(extractedShots, {
+                            date: new Date(date)
+                        });
+
+                        this.db.shots.set(date, datedShots).write();
+                    });
+            });
+    }
+
+    savePopularShots() {
+        return new Promise((resolve, reject) => {
+            this.getShots()
+                .then((shots) => {
+                    Extractor.extractShots(shots)
+                        .then((extractedShots) => {
+                            const popularShots = {
+                                shots: extractedShots,
+                                date: new Date()
+                            };
+
+                            this.db.shots
+                                .set('popular', popularShots)
+                                .write();
+                                
+                            resolve(popularShots);
+                        });
+                });
         });
     }
 
     getShots(params = {}) {
-        console.log(params);
         const apiUrl = this.buildUrl('shots', params);
 
         console.log(apiUrl);

@@ -2,6 +2,7 @@ import express from 'express';
 import Webpack from 'webpack';
 import Extractor from './Extractor';
 import Dribbble from './Dribbble';
+import Endpoint from './Endpoint';
 import Db from './database/Db';
 
 const config = require('../webpack.config.client');
@@ -9,10 +10,11 @@ const path = require('path');
 
 const db = new Db();
 const dribbble = new Dribbble(db);
+const endpoint = new Endpoint(db, dribbble);
 const app = express();
 const compiler = Webpack(config);
 
-dribbble.saveData();
+// dribbble.saveData();
 
 app.use(express.static('static'));
 
@@ -26,6 +28,14 @@ app.use(require('webpack-hot-middleware')(compiler, {
     path: '/__webpack_hmr',
     heartbeat: 10 * 1000
 }));
+
+app.get('/popular', (req, res) => {
+    endpoint
+        .getPopularShots()
+        .then((popularShots) => {
+            res.send(popularShots);
+        });
+});
 
 app.get('/colors', (req, res) => {
     const params = {

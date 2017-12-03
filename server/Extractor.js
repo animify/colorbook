@@ -15,8 +15,6 @@ class Extractor {
     }
 
     static extractData(shot) {
-        console.log(shot);
-
         const normalizedData = {
             id: shot.id,
             title: shot.title,
