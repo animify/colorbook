@@ -30,6 +30,10 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
+                test: /\.(png|eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader'
+            },
+            {
                 test: /\.styl$/,
                 use: [
                     'style-loader',
@@ -38,10 +42,6 @@ module.exports = {
                         loader: 'stylus-loader'
                     },
                 ],
-            },
-            {
-                test: /\.(png|eot|svg|ttf|woff|woff2)$/,
-                loader: 'file-loader'
             }
         ],
     },

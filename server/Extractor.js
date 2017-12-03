@@ -9,6 +9,11 @@ class Extractor {
         }));
     }
 
+    static extractShots(shots) {
+        const shotsData = shots.map(shot => Extractor.extractData(shot));
+        return Promise.all(shotsData);
+    }
+
     static extractData(shot) {
         console.log(shot);
 

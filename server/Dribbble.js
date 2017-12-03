@@ -4,9 +4,10 @@ import querystring from 'querystring';
 import Helpers from './common/helpers';
 
 class Dribbble {
-    constructor() {
+    constructor(db) {
         this.apiUrl = 'https://api.dribbble.com/v1';
         this.config = Helpers.config;
+        this.db = db;
     }
 
     buildUrl(endpoint, queryObject) {
@@ -17,6 +18,22 @@ class Dribbble {
 
         const query = querystring.stringify(tokenedObject);
         return `${this.apiUrl}/${endpoint}?${query}`;
+    }
+
+    saveData() {
+        console.log('saving data');
+        ['2017-11-30', '2017-12-01'].forEach((date) => {
+            console.log(date);
+            this.saveShotsByDate(date);
+        });
+    }
+
+    saveShotsByDate(date) {
+        this.getShots({
+            date
+        }).then((shots) => {
+            this.db.shots.set(date, shots).write();
+        });
     }
 
     getShots(params = {}) {

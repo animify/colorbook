@@ -61,3 +61,4 @@ typings/
 server/configs/config.yml
 bash.exe.stackdump
 client/stylesheets/styl/fonts/*
+server/database/shots.json

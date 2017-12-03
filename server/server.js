@@ -2,13 +2,18 @@ import express from 'express';
 import Webpack from 'webpack';
 import Extractor from './Extractor';
 import Dribbble from './Dribbble';
+import Db from './database/Db';
 
 const config = require('../webpack.config.client');
 const path = require('path');
 
-const dribbble = new Dribbble();
+const db = new Db();
+const dribbble = new Dribbble(db);
 const app = express();
 const compiler = Webpack(config);
+
+dribbble.saveData();
+
 app.use(express.static('static'));
 
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -31,16 +36,15 @@ app.get('/colors', (req, res) => {
 
     dribbble.getShots(params)
         .then((shots) => {
-            const shotsData = shots.map(shot => Extractor.extractData(shot));
+            Extractor.extractShots(shots)
+                .then((extractedShots) => {
+                    const response = {
+                        shots: extractedShots,
+                        params: defaultParams
+                    };
 
-            Promise.all(shotsData).then((e) => {
-                const response = {
-                    shots: e,
-                    params: defaultParams
-                };
-
-                res.send(response);
-            });
+                    res.send(response);
+                });
         });
 });
 
