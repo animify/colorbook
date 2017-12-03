@@ -83,7 +83,7 @@ class Timeline extends React.Component {
             <section className="contain">
                 <div className="row">
                     <div className="col xs-12">
-                        <Intro message="A timeline of popular color palettes on Dribbble." />
+                        <Intro message="A timeline of the most popular daily color palettes on Dribbble." />
                     </div>
                 </div>
                 {contentData.map(data => (

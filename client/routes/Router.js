@@ -6,7 +6,8 @@ import Footer from './../containers/Footer';
 
 const Router = () => (
     <BrowserRouter>
-        <div>
+        <div id="colorbook">
+            <span className="fade" />
             <Navbar />
             <div className="content">
                 <HomeRoute />

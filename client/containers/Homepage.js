@@ -45,7 +45,7 @@ class Homepage extends React.Component {
             <section className="contain">
                 <div className="row">
                     <div className="col xs-12">
-                        <Intro message="The latest &amp; most popular color palettes on Dribbble." />
+                        <Intro message="The latest &amp; most popular color palettes trending on Dribbble right now." />
                     </div>
                 </div>
                 <div className="row shots">
