@@ -11,24 +11,56 @@ class Timeline extends React.Component {
         super(props);
 
         this.state = {
-            shots: []
+            currentDate: moment().format('YYYY-MM-DD'),
+            loading: false,
+            content: []
         };
+
+        this.appendPreviousDay = this.appendPreviousDay.bind(this);
     }
 
     componentDidMount() {
-        const dateToday = moment().format('YYYY-MM-DD');
-        console.log(dateToday);
-        this.getData(dateToday);
+        this.appendTimeline(this.state.currentDate);
     }
 
-    getData(date) {
+    getTimelineBlock(timelineData) {
+        const colorBlocks = this.renderColorBlocks(timelineData.shots);
+
+        return (
+            <div className="row shots" key={timelineData.date}>
+                <div className="col xs-12">
+                    {timelineData.date && <DateTitle date={timelineData.date} />}
+                </div>
+                {colorBlocks}
+            </div>
+        );
+    }
+
+    appendPreviousDay() {
+        const datePrevious = moment(this.state.currentDate).subtract(1, 'day').format('YYYY-MM-DD');
+        this.appendTimeline(datePrevious);
+    }
+
+    appendTimeline(date) {
+        this.setState({
+            loading: true
+        });
+
         request
             .get(`/api/timeline/${date}`)
             .then((response) => {
-                console.log(response);
-                this.setState({
-                    params: response.data.params,
+                const timelineData = {
+                    date: response.data.content.date,
                     shots: response.data.content.shots
+                };
+
+                const content = this.state.content.slice();
+                content.push(timelineData);
+
+                this.setState({
+                    currentDate: date,
+                    loading: false,
+                    content
                 });
             });
     }
@@ -44,19 +76,26 @@ class Timeline extends React.Component {
     }
 
     render() {
-        const shots = this.state.shots;
-        const params = this.state.params;
-        const colorBlocks = this.renderColorBlocks(shots);
+        const contentData = this.state.content;
+        const isLoading = this.state.loading;
+
         return (
             <section className="contain">
                 <div className="row">
-                    <div className="xs-12">
+                    <div className="col xs-12">
                         <Intro message="A timeline of popular color palettes on Dribbble." />
                     </div>
                 </div>
-                <div className="row shots">
-                    {params && <DateTitle date={params.date} />}
-                    {colorBlocks}
+                {contentData.map(data => (
+                    this.getTimelineBlock(data)
+                ))}
+                <div className="row">
+                    <div className="col xs-12">
+                        { !isLoading ?
+                            (<div role="presentation" onClick={this.appendPreviousDay} className="button primary">Load previous day...</div>) :
+                            (<p>Loading...</p>)
+                        }
+                    </div>
                 </div>
             </section>
         );
