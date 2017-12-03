@@ -20,7 +20,7 @@ class Homepage extends React.Component {
 
     getData() {
         request
-            .get('/popular')
+            .get('/api/popular')
             .then((response) => {
                 console.log(response);
                 this.setState({

@@ -34,12 +34,31 @@ class Endpoint {
         });
     }
 
-    getAllDateShots() {
+    getShotsByDate(date) {
+        return new Promise((resolve, reject) => {
+            const datedShots = this.db.shots.get(date);
+            const shotsLength = datedShots.size().value();
+            console.log(datedShots, shotsLength);
 
-    }
-
-    getDateShots(date) {
-
+            if (shotsLength === 0) {
+                this.dribbble
+                    .saveShotsByDate(date)
+                    .then((shots) => {
+                        resolve({
+                            success: true,
+                            content: shots
+                        });
+                    })
+                    .catch((errObject) => {
+                        reject(errObject);
+                    });
+            } else {
+                resolve({
+                    success: true,
+                    content: datedShots
+                });
+            }
+        });
     }
 }
 

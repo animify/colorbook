@@ -29,9 +29,19 @@ app.use(require('webpack-hot-middleware')(compiler, {
     heartbeat: 10 * 1000
 }));
 
-app.get('/popular', (req, res) => {
+app.get('/api/popular', (req, res) => {
     endpoint
         .getPopularShots()
+        .then((shotsObject) => {
+            res.send(shotsObject);
+        });
+});
+
+app.get('/api/timeline/:date', (req, res) => {
+    const date = req.params.date;
+
+    endpoint
+        .getShotsByDate(date)
         .then((shotsObject) => {
             res.send(shotsObject);
         });

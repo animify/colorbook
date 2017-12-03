@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import request from './../modules/Request';
 import Intro from './../components/Intro';
@@ -15,12 +16,14 @@ class Timeline extends React.Component {
     }
 
     componentDidMount() {
-        this.getData();
+        const dateToday = moment().format('YYYY-MM-DD');
+        console.log(dateToday);
+        this.getData(dateToday);
     }
 
-    getData() {
+    getData(date) {
         request
-            .get('/popular')
+            .get(`/api/timeline/${date}`)
             .then((response) => {
                 console.log(response);
                 this.setState({

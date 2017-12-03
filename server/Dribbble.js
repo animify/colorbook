@@ -34,11 +34,16 @@ class Dribbble {
                 .then((shots) => {
                     Extractor.extractShots(shots)
                         .then((extractedShots) => {
-                            const datedShots = Object.assign(extractedShots, {
-                                date: new Date(date)
-                            });
+                            const datedShots = {
+                                shots: extractedShots,
+                                date
+                            };
 
-                            this.db.shots.set(date, datedShots).write();
+                            this.db.shots
+                                .set(date, datedShots)
+                                .write();
+
+                            resolve(datedShots);
                         })
                         .catch((errObject) => {
                             reject(errObject);
