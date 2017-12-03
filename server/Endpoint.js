@@ -17,13 +17,19 @@ class Endpoint {
                 this.dribbble
                     .savePopularShots()
                     .then((shots) => {
-                        resolve(shots);
+                        resolve({
+                            success: true,
+                            content: shots
+                        });
                     })
                     .catch((errObject) => {
                         reject(errObject);
                     });
             } else {
-                resolve(popularShots);
+                resolve({
+                    success: true,
+                    content: popularShots
+                });
             }
         });
     }

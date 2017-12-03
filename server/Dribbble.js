@@ -61,6 +61,7 @@ class Dribbble {
                             this.db.shots
                                 .set('popular', popularShots)
                                 .write();
+
                             resolve(popularShots);
                         })
                         .catch((errObject) => {

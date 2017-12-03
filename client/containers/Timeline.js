@@ -5,7 +5,7 @@ import Intro from './../components/Intro';
 import ColorBlock from './../components/ColorBlock';
 import DateTitle from './../components/DateTitle';
 
-class Homepage extends React.Component {
+class Timeline extends React.Component {
     constructor(props) {
         super(props);
 
@@ -48,7 +48,7 @@ class Homepage extends React.Component {
             <section className="contain">
                 <div className="row">
                     <div className="xs-12">
-                        <Intro message="The latest &amp; most popular color palettes on Dribbble." />
+                        <Intro message="A timeline of popular color palettes on Dribbble." />
                     </div>
                 </div>
                 <div className="row shots">
@@ -60,4 +60,4 @@ class Homepage extends React.Component {
     }
 }
 
-export default Homepage;
+export default Timeline;

@@ -32,8 +32,8 @@ app.use(require('webpack-hot-middleware')(compiler, {
 app.get('/popular', (req, res) => {
     endpoint
         .getPopularShots()
-        .then((popularShots) => {
-            res.send(popularShots);
+        .then((shotsObject) => {
+            res.send(shotsObject);
         });
 });
 
@@ -49,7 +49,7 @@ app.get('/colors', (req, res) => {
             Extractor.extractShots(shots)
                 .then((extractedShots) => {
                     const response = {
-                        shots: extractedShots,
+                        data: extractedShots,
                         params: defaultParams
                     };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 class Navbar extends React.Component {
@@ -21,10 +22,10 @@ class Navbar extends React.Component {
                         <div className="xs-12">
                             <ul className="list horizontal float-right">
                                 <li>
-                                    <a>Latest</a>
+                                    <Link to="/">Latest</Link>
                                 </li>
                                 <li>
-                                    <a>By date</a>
+                                    <Link to="/timeline">Timeline</Link>
                                 </li>
                             </ul>
                         </div>
