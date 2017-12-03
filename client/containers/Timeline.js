@@ -94,7 +94,7 @@ class Timeline extends React.Component {
                         <div className="previous-loader">
                             { !isLoading ?
                                 (<div role="presentation" onClick={this.appendPreviousDay} className="button primary">Load previous day...</div>) :
-                                (<p>Loading...</p>)
+                                (<div className="loader small dark" />)
                             }
                         </div>
                     </div>
