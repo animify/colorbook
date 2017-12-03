@@ -28,7 +28,6 @@ class Dribbble {
             needle
                 .get(apiUrl, (error, response) => {
                     if (!error && response.statusCode === 200) {
-                        console.log(response.body);
                         resolve(response.body);
                     }
                 });

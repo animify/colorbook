@@ -23,16 +23,23 @@ app.use(require('webpack-hot-middleware')(compiler, {
 }));
 
 app.get('/colors', (req, res) => {
-    dribbble.getShots()
+    const params = {
+        date: '2017-12-01'
+    };
+
+    const defaultParams = Object.assign({}, params);
+
+    dribbble.getShots(params)
         .then((shots) => {
             const shotsData = shots.map(shot => Extractor.extractData(shot));
 
             Promise.all(shotsData).then((e) => {
-                // console.log(e[0]);
-                // const colorList = [].concat(...e);
-                // console.log(colorList);
-                res.send(e);
-                // res.send(colorList.map(color => color.hex()));
+                const response = {
+                    shots: e,
+                    params: defaultParams
+                };
+
+                res.send(response);
             });
         });
 });

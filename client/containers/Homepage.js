@@ -1,6 +1,23 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import request from './../modules/Request';
+
+const Intro = () => (
+    <div className="content-intro">
+        <small>Colorbook</small>
+        <h2>The latest &amp; most popular color palettes on Dribbble.</h2>
+    </div>
+);
+
+const DateTitle = ({ date }) => {
+    const nativeDate = new Date(date);
+    const formatedDate = moment(nativeDate).format('LL');
+
+    return (
+        <h5 className="date">{formatedDate}</h5>
+    );
+};
 
 const ColorBlock = ({ shot }) => (
     <div className="col xs-12 color-col">
@@ -10,7 +27,7 @@ const ColorBlock = ({ shot }) => (
                     <img className="avatar" src={shot.user_avatar} height="52" alt={shot.user_name} />
                 </div>
                 <div className="inline">
-                    <h4>{ shot.title }</h4>
+                    <h4><a href={shot.url}>{ shot.title }</a></h4>
                     <a href={shot.user_url}>@{ shot.user_name }</a>
                 </div>
             </div>
@@ -32,7 +49,7 @@ class Homepage extends React.Component {
         super(props);
 
         this.state = {
-            dataFeed: []
+            shots: []
         };
     }
 
@@ -45,7 +62,8 @@ class Homepage extends React.Component {
             .get('/colors')
             .then((response) => {
                 this.setState({
-                    dataFeed: response.data
+                    params: response.data.params,
+                    shots: response.data.shots
                 });
             });
     }
@@ -61,18 +79,28 @@ class Homepage extends React.Component {
     }
 
     render() {
-        const dataFeed = this.state.dataFeed;
-        const colorBlocks = this.renderColorBlocks(dataFeed);
-
+        const shots = this.state.shots;
+        const params = this.state.params;
+        const colorBlocks = this.renderColorBlocks(shots);
         return (
             <section className="contain">
                 <div className="row">
+                    <div className="xs-12">
+                        <Intro />
+                    </div>
+                </div>
+                <div className="row shots">
+                    {params && <DateTitle date={params.date} />}
                     {colorBlocks}
                 </div>
             </section>
         );
     }
 }
+
+DateTitle.propTypes = {
+    date: PropTypes.string.isRequired,
+};
 
 ColorBlock.propTypes = {
     shot: PropTypes.shape({
