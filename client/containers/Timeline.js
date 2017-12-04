@@ -17,6 +17,8 @@ class Timeline extends React.Component {
             const dateValid = moment(dateParam).isValid();
             if (dateValid) {
                 currentDate = dateParam;
+            } else {
+                this.props.history.replace('/timeline');
             }
         }
 
