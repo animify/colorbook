@@ -32,7 +32,7 @@ ColorBlock.propTypes = {
         imageUrl: PropTypes.string,
         url: PropTypes.string,
         user_name: PropTypes.string,
-        user_pro: PropTypes.string,
+        user_pro: PropTypes.boolean,
         user_url: PropTypes.string,
         colors: PropTypes.arrayOf(PropTypes.string)
     }).isRequired

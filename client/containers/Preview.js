@@ -80,8 +80,9 @@ class Preview extends React.Component {
                         <div className="col xs-12">
                             <div className="profile-more">
                                 <p className="small-title">More options</p>
-                                <p className="link"><a>Download Adobe Photoshop (.aco) file</a></p>
+                                <p className="link"><a href={shot.url}>See original shot on Dribbble</a></p>
                                 <p className="link"><a href={shot.user_url}>Explore more shots by <strong>@{shot.user_name}</strong></a></p>
+                                <p className="link"><a>Download Adobe Photoshop (.aco) file</a></p>
                             </div>
                         </div>
                     </div>

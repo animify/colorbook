@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import request from './../modules/Request';
 import Intro from './../components/Intro';
@@ -9,9 +10,18 @@ import DateTitle from './../components/DateTitle';
 class Timeline extends React.Component {
     constructor(props) {
         super(props);
+        const dateParam = this.props.match.params.date;
+        let currentDate = moment().format('YYYY-MM-DD');
+
+        if (dateParam) {
+            const dateValid = moment(dateParam).isValid();
+            if (dateValid) {
+                currentDate = dateParam;
+            }
+        }
 
         this.state = {
-            currentDate: moment().format('YYYY-MM-DD'),
+            currentDate,
             loading: false,
             content: []
         };
@@ -104,5 +114,13 @@ class Timeline extends React.Component {
         );
     }
 }
+
+Timeline.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            date: PropTypes.node,
+        }).isRequired,
+    }).isRequired
+};
 
 export default Timeline;
