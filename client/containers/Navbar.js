@@ -17,7 +17,7 @@ class Navbar extends React.Component {
     render() {
         return (
             <nav>
-                <img src={primaryLogo} alt="Colorbook primary logo" height="36" />
+                <Link to="/"><img src={primaryLogo} alt="Colorbook primary logo" height="36" /></Link>
                 <ul className="list horizontal float-right">
                     <li>
                         <Link to="/">Latest</Link>
