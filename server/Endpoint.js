@@ -58,6 +58,32 @@ class Endpoint {
             }
         });
     }
+
+    getShotById(id) {
+        return new Promise((resolve, reject) => {
+            const dbValue = this.db.shots.value();
+            const shotId = Number(id);
+
+            if (!isNaN(shotId)) {
+                const displayShot = Object.keys(dbValue).map((key) => {
+                    const shots = dbValue[key].shots;
+                    const foundShot = shots.find(shot => shot.id === shotId);
+                    return foundShot;
+                }).find(shot => shot !== undefined);
+
+                if (displayShot) {
+                    resolve({
+                        success: true,
+                        content: displayShot
+                    });
+                } else {
+                    reject(Helpers.buildError(404, 'Shoot! Shot could not be found.'));
+                }
+            } else {
+                reject(Helpers.buildError(400, 'Oh no, shot ids can not be strings!'));
+            }
+        });
+    }
 }
 
 export default Endpoint;

@@ -45,6 +45,19 @@ app.get('/api/timeline/:date', (req, res) => {
         });
 });
 
+app.get('/api/shot/:id', (req, res) => {
+    const id = req.params.id;
+
+    endpoint
+        .getShotById(id)
+        .then((shotObject) => {
+            res.send(shotObject);
+        })
+        .catch((shotObject) => {
+            res.send(shotObject);
+        });
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.resolve('client/local.html'));
 });

@@ -4,7 +4,7 @@ import request from './../modules/Request';
 import Intro from './../components/Intro';
 import ColorBlock from './../components/ColorBlock';
 
-class Homepage extends React.Component {
+class Preview extends React.Component {
     constructor(props) {
         super(props);
 
@@ -18,13 +18,13 @@ class Homepage extends React.Component {
         this.getData();
     }
 
-    getData() {
+    getData(id) {
         this.setState({
             loading: true
         });
 
         request
-            .get('/api/popular')
+            .get(`/api/shot/${id}`)
             .then((response) => {
                 this.setState({
                     loading: false,
@@ -66,4 +66,4 @@ class Homepage extends React.Component {
     }
 }
 
-export default Homepage;
+export default Preview;
