@@ -1,3 +1,12 @@
+.small-title
+    text-transform uppercase
+    font-size font-size-small
+    color text-lightest
+    font-weight 500
+    display block
+    margin-bottom 1rem
+    line-height 1em
+
 .fade
     fixed top left
     width 100%
@@ -108,3 +117,51 @@ footer
         margin-top 1.2rem
     .list
         margin-top 1.6rem
+
+.profile
+    padding 5rem 0 0 0
+    .description
+        position relative
+        padding 0 0 3rem 4.8rem
+        .inline
+            vertical-align middle
+        .avatar
+            border-radius border-radius-normal
+            margin-right 1.5rem
+            absolute left top
+        h3
+            line-height 1em
+            margin-bottom .4rem
+            font-weight 500
+        a
+            color text-default
+            &:hover
+                color color-primary
+    &-shot
+        padding 0 0 3rem 0
+        img
+            border-radius border-radius-normal
+            width 100%
+            max-width 600px
+            display block
+            margin 0 auto
+    .color
+        display inline-block
+        text-align center
+        width 20%
+        p
+            padding .5rem 0
+            font-weight 500
+        span
+            content ' '
+            width 4rem
+            height 4rem
+            display block
+            margin 0 auto
+            border-radius 50%
+            border 3px solid #fff
+            padding 0 .5rem
+    &-more
+        padding 3rem 0 2rem 0
+        p + p
+            margin-top .5rem

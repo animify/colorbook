@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-const ColorBlock = ({ shot }) => (
+const Profile = ({ shot }) => (
     <div className="col xs-12 color-col">
         <div className="color-block">
             <div className="description">
@@ -10,7 +9,7 @@ const ColorBlock = ({ shot }) => (
                     <img className="avatar" src={shot.user_avatar} height="52" alt={shot.user_name} />
                 </div>
                 <div className="inline">
-                    <h5><Link to={`/s/${shot.id}`}>{ shot.title }</Link></h5>
+                    <h5><a href={shot.url}>{ shot.title }</a></h5>
                     <a href={shot.user_url}>@{ shot.user_name }</a>
                 </div>
             </div>
@@ -26,7 +25,7 @@ const ColorBlock = ({ shot }) => (
     </div>
 );
 
-ColorBlock.propTypes = {
+Profile.propTypes = {
     shot: PropTypes.shape({
         id: PropTypes.number,
         imageUrl: PropTypes.string,
@@ -37,4 +36,4 @@ ColorBlock.propTypes = {
     }).isRequired
 };
 
-export default ColorBlock;
+export default Profile;
