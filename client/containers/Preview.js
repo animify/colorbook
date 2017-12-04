@@ -52,7 +52,7 @@ class Preview extends React.Component {
                                 </div>
                                 <div className="inline">
                                     <h3>{shot.title}</h3>
-                                    <a href={shot.user_url}>@{ shot.user_name }</a>
+                                    <a href={shot.user_url}>@{ shot.user_name } {shot.user_pro && (<span className="user-pro">pro</span>)}</a>
                                 </div>
                             </div>
                         </div>

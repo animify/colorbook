@@ -26,6 +26,7 @@ class Extractor {
             url: shot.html_url,
             imageUrl: shot.images.normal,
             user_name: shot.user.username,
+            user_pro: shot.user.pro,
             user_url: shot.user.html_url,
             user_avatar: shot.user.avatar_url,
             colors: []

@@ -11,7 +11,7 @@ const ColorBlock = ({ shot }) => (
                 </div>
                 <div className="inline">
                     <h5><Link to={`/s/${shot.id}`}>{ shot.title }</Link></h5>
-                    <a href={shot.user_url}>@{ shot.user_name }</a>
+                    <a href={shot.user_url}>@{ shot.user_name } {shot.user_pro && (<span className="user-pro">pro</span>)}</a>
                 </div>
             </div>
             <div className="colors">
@@ -32,6 +32,7 @@ ColorBlock.propTypes = {
         imageUrl: PropTypes.string,
         url: PropTypes.string,
         user_name: PropTypes.string,
+        user_pro: PropTypes.string,
         user_url: PropTypes.string,
         colors: PropTypes.arrayOf(PropTypes.string)
     }).isRequired

@@ -7,6 +7,18 @@
     margin-bottom 1rem
     line-height 1em
 
+.user-pro
+    relative top -1px
+    padding .1rem .24rem .15rem .24rem
+    text-transform uppercase
+    font-size 13px
+    border-radius border-radius-normal
+    background-color #000
+    color #fff
+    font-weight 500
+    line-height 1em
+    transition all .1s ease
+
 .fade
     fixed top left
     width 100%
@@ -31,7 +43,7 @@ nav
 
 .content-intro
     width 70%
-    padding 6rem 0
+    padding 7rem 0 6rem 0
     small
         text-transform uppercase
         color color-primary
@@ -63,7 +75,7 @@ nav
         absolute left top
     .description
         position relative
-        padding-left 4.5rem
+        padding-left 4.2rem
         h5
             line-height 1em
             margin-bottom .4rem
@@ -120,6 +132,10 @@ footer
 
 .profile
     padding 5rem 0 0 0
+    a
+        color text-default
+        &:hover
+            color color-primary
     .description
         position relative
         padding 0 0 3rem 4.8rem
@@ -133,10 +149,7 @@ footer
             line-height 1em
             margin-bottom .4rem
             font-weight 500
-        a
-            color text-default
-            &:hover
-                color color-primary
+
     &-shot
         padding 0 0 3rem 0
         img
@@ -164,4 +177,4 @@ footer
     &-more
         padding 3rem 0 2rem 0
         p + p
-            margin-top .5rem
+            margin-top .6rem
