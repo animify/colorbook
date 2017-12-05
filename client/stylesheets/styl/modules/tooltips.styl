@@ -47,7 +47,17 @@ dark-tooltip-color = #000
       border-color dark-tooltip-color
       background-color dark-tooltip-color
       color #fff
-  &:hover
+  &.invalid
+    &:before
+      box-shadow none !important
+      background-color color-red
+    &:after
+      border-color color-red
+      background-color color-red
+      color #fff
+      padding 1em 1em
+      z-index 200
+  &:not(.closed):hover, &.open
     &:before
       transform rotate(45deg) scale(1)
       opacity 1

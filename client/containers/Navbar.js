@@ -19,6 +19,7 @@ class Navbar extends React.Component {
             dataFeed: [],
             searchValue: '',
             validSearchValue: true,
+            searchValueError: 'Oh oh, use a YYYY-MM-DD date format',
             searching: false
         };
     }
@@ -54,6 +55,7 @@ class Navbar extends React.Component {
 
         if (isSearching) {
             this.setState({
+                validSearchValue: true,
                 searching: false
             });
         }
@@ -71,6 +73,7 @@ class Navbar extends React.Component {
             } else {
                 this.setState({
                     validSearchValue: false,
+                    searchValueError: 'Oh oh, use a YYYY-MM-DD date format'
                 });
             }
         }
@@ -89,6 +92,7 @@ class Navbar extends React.Component {
         const isSearching = this.state.searching;
         const searchValue = this.state.searchValue;
         const validSearchValue = this.state.validSearchValue;
+        const errorMessage = this.state.searchValueError;
 
         return (
             <nav>
@@ -97,16 +101,18 @@ class Navbar extends React.Component {
                     <li>
                         <form action="/" onSubmit={this.goToTimeline}>
                             <div className="input transparent">
-                                { isSearching && (<input className={validSearchValue ? '' : 'invalid'} ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder="Jump to date e.g 2017-12-03..." onChange={this.isTyping} value={searchValue} />)}
+                                <span className={validSearchValue ? 'tooltip closed' : 'tooltip open invalid'} data-content={errorMessage} data-position="bottom left" data-text="small">
+                                    { isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder="Jump to date e.g 2017-12-03..." onChange={this.isTyping} value={searchValue} />)}
 
-                                <label htmlFor="jumpto" className="float-left">
-                                    <div onClick={this.disableSearch} role="presentation" className={!isSearching ? 'hidden' : ''}>
-                                        <i data-minicon="x" />
-                                    </div>
-                                    <div onClick={this.enableSearch} role="presentation" className={isSearching ? 'hidden' : ''}>
-                                        <i data-minicon="search" />
-                                    </div>
-                                </label>
+                                    <label htmlFor="jumpto" className="float-left">
+                                        <div onClick={this.disableSearch} role="presentation" className={!isSearching ? 'hidden' : ''}>
+                                            <i data-minicon="x" />
+                                        </div>
+                                        <div onClick={this.enableSearch} role="presentation" className={isSearching ? 'hidden' : ''}>
+                                            <i data-minicon="search" />
+                                        </div>
+                                    </label>
+                                </span>
                             </div>
                         </form>
                     </li>

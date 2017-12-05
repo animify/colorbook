@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Switch } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import HomeRoute from './HomeRoute';
 import Navbar from './../containers/Navbar';
 import Footer from './../containers/Footer';
