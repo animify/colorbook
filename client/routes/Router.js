@@ -7,16 +7,14 @@ import history from './../modules/History';
 
 const BasicRouter = () => (
     <Router history={history}>
-        <Switch>
-            <div id="colorbook">
-                <span className="fade" />
-                <Navbar />
-                <div className="content">
-                    <HomeRoute />
-                </div>
-                <Footer />
+        <div id="colorbook">
+            <span className="fade" />
+            <Navbar />
+            <div className="content">
+                <HomeRoute />
             </div>
-        </Switch>
+            <Footer />
+        </div>
     </Router>
 );
 

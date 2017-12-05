@@ -113,7 +113,7 @@ class Navbar extends React.Component {
                 </ul>
                 <ul className="list horizontal float-right">
                     <li>
-                        <Link to="/">Latest</Link>
+                        <Link to="/">Most popular</Link>
                     </li>
                     <li>
                         <Link to="/timeline">Timeline</Link>
