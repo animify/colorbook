@@ -14,13 +14,15 @@ class Navbar extends React.Component {
         this.disableSearch = this.disableSearch.bind(this);
         this.isTyping = this.isTyping.bind(this);
         this.goToTimeline = this.goToTimeline.bind(this);
+        this.listenToPath = this.listenToPath.bind(this);
 
         this.state = {
             dataFeed: [],
             searchValue: '',
             validSearchValue: true,
             searchValueError: 'Oh oh, use a YYYY-MM-DD date format',
-            searching: false
+            searching: false,
+            currentPath: this.getPath(history.location) || ''
         };
     }
 
@@ -38,6 +40,20 @@ class Navbar extends React.Component {
         });
 
         minicons.swap();
+
+        this.listenToPath();
+    }
+
+    getPath(location) {
+        return location.pathname.split('/').filter(pathname => pathname !== '')[0];
+    }
+
+    listenToPath() {
+        history.listen((location) => {
+            this.setState({
+                currentPath: this.getPath(location) || ''
+            });
+        });
     }
 
     enableSearch() {
@@ -93,6 +109,7 @@ class Navbar extends React.Component {
         const searchValue = this.state.searchValue;
         const validSearchValue = this.state.validSearchValue;
         const errorMessage = this.state.searchValueError;
+        const currentPath = this.state.currentPath;
 
         return (
             <nav>
@@ -119,10 +136,10 @@ class Navbar extends React.Component {
                 </ul>
                 <ul className="list horizontal float-right">
                     <li>
-                        <Link to="/">Most popular</Link>
+                        <Link className={currentPath === '' ? 'active' : ''} to="/">Most popular</Link>
                     </li>
                     <li>
-                        <Link to="/timeline">Timeline</Link>
+                        <Link className={currentPath === 'timeline' ? 'active' : ''} to="/timeline">Timeline</Link>
                     </li>
                 </ul>
             </nav>
