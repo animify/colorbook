@@ -33,7 +33,27 @@ nav
     padding .9rem standard-page-padding
     width 100%
     z-index 1000
-
+    .jump-to
+        margin-left 1.6rem
+        vertical-align top
+        user-select none
+        li
+            line-height 0
+            label
+                svg
+                    margin-right .6rem
+                    relative top 4px
+                &:hover
+                    svg
+                        stroke text-default
+                    cursor pointer
+            input
+                height auto !important
+                line-height 1.7em !important
+                &:focus
+                    & + label
+                        svg
+                            stroke color-heading
     a
         color text-disabled
         font-weight 400

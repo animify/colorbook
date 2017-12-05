@@ -3,6 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import request from './../modules/Request';
+import history from '../modules/History';
 import Intro from './../components/Intro';
 import ColorBlock from './../components/ColorBlock';
 import DateTitle from './../components/DateTitle';
@@ -10,20 +11,8 @@ import DateTitle from './../components/DateTitle';
 class Timeline extends React.Component {
     constructor(props) {
         super(props);
-        const dateParam = this.props.match.params.date;
-        let currentDate = moment().format('YYYY-MM-DD');
-
-        if (dateParam) {
-            const dateValid = moment(dateParam).isValid();
-            if (dateValid) {
-                currentDate = dateParam;
-            } else {
-                this.props.history.replace('/timeline');
-            }
-        }
-
         this.state = {
-            currentDate,
+            currentDate: null,
             loading: false,
             content: []
         };
@@ -33,14 +22,23 @@ class Timeline extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.appendTimeline(this.state.currentDate);
+        const dateParam = this.props.match.params.date;
+        this.loadDate(dateParam);
+    }
+
+    componentWillReceiveProps(state) {
+        const dateParam = state.match.params.date;
+        if (dateParam !== this.state.currentDate) {
+            this.loadDate(dateParam);
+        }
     }
 
     getTimelineBlock(timelineData) {
         const colorBlocks = this.renderColorBlocks(timelineData.shots);
+        const id = Math.random().toString(36).substring(7);
 
         return (
-            <div className="row shots" key={timelineData.date}>
+            <div className="row shots" key={`${id}-${timelineData.date}`}>
                 <div className="col xs-12">
                     {timelineData.date && <DateTitle date={timelineData.date} />}
                 </div>
@@ -49,9 +47,36 @@ class Timeline extends React.Component {
         );
     }
 
+    loadDate(date) {
+        let currentDate = moment().format('YYYY-MM-DD');
+
+        if (date) {
+            const dateValid = moment(date).isValid();
+
+            if (dateValid && moment(date).format('YYYY-MM-DD') === date) {
+                currentDate = date;
+            } else {
+                history.replace('/timeline');
+            }
+        }
+
+        this.setState({
+            currentDate
+        });
+
+        this.clearTimeline();
+        this.appendTimeline(currentDate);
+    }
+
     appendPreviousDay() {
         const datePrevious = moment(this.state.currentDate).subtract(1, 'day').format('YYYY-MM-DD');
         this.appendTimeline(datePrevious);
+    }
+
+    clearTimeline() {
+        this.setState({
+            content: []
+        });
     }
 
     appendTimeline(date) {

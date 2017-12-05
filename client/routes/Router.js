@@ -1,20 +1,23 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import HomeRoute from './HomeRoute';
 import Navbar from './../containers/Navbar';
 import Footer from './../containers/Footer';
+import history from './../modules/History';
 
-const Router = () => (
-    <BrowserRouter>
-        <div id="colorbook">
-            <span className="fade" />
-            <Navbar />
-            <div className="content">
-                <HomeRoute />
+const BasicRouter = () => (
+    <Router history={history}>
+        <Switch>
+            <div id="colorbook">
+                <span className="fade" />
+                <Navbar />
+                <div className="content">
+                    <HomeRoute />
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
-    </BrowserRouter>
+        </Switch>
+    </Router>
 );
 
-export default Router;
+export default BasicRouter;
