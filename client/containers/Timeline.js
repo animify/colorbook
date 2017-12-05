@@ -14,6 +14,7 @@ class Timeline extends React.Component {
         this.state = {
             currentDate: null,
             loading: false,
+            customDate: false,
             content: []
         };
 
@@ -23,13 +24,13 @@ class Timeline extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         const dateParam = this.props.match.params.date;
-        this.loadDate(dateParam);
+        this.loadDate(dateParam, !!dateParam);
     }
 
     componentWillReceiveProps(state) {
         const dateParam = state.match.params.date;
         if (dateParam !== this.state.currentDate) {
-            this.loadDate(dateParam);
+            this.loadDate(dateParam, !!dateParam);
         }
     }
 
@@ -47,7 +48,7 @@ class Timeline extends React.Component {
         );
     }
 
-    loadDate(date) {
+    loadDate(date, custom) {
         let currentDate = moment().format('YYYY-MM-DD');
 
         if (date) {
@@ -61,6 +62,7 @@ class Timeline extends React.Component {
         }
 
         this.setState({
+            customDate: custom,
             currentDate
         });
 
@@ -116,12 +118,16 @@ class Timeline extends React.Component {
     render() {
         const contentData = this.state.content;
         const isLoading = this.state.loading;
+        const customDate = this.state.customDate;
+        const currentDate = this.state.currentDate;
+        const daysAgo = moment().diff(moment(currentDate), 'days');
+        const message = (customDate && daysAgo > 0) ? `You've travelled back in time to the most popular palettes on Dribbble, ${daysAgo} days ago.` : 'A timeline of the most popular daily color palettes on Dribbble.';
 
         return (
             <section className="contain">
                 <div className="row">
                     <div className="col xs-12">
-                        <Intro message="A timeline of the most popular daily color palettes on Dribbble." />
+                        <Intro message={message} />
                     </div>
                 </div>
                 {contentData.map(data => (
