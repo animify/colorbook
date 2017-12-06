@@ -21,7 +21,7 @@ class Navbar extends React.Component {
             dataFeed: [],
             searchValue: '',
             validSearchValue: true,
-            searchValueError: 'Oh oh, use a YYYY-MM-DD date format',
+            searchValueError: 'Oh snap, you should use a YYYY-MM-DD date format',
             searching: false,
             currentPath: this.getPath(history.location) || ''
         };
@@ -88,9 +88,14 @@ class Navbar extends React.Component {
             if (dateValid) {
                 history.push(`/timeline/${this.state.searchValue}`);
             } else {
+                let searchValueError = 'Oh snap, you should use a YYYY-MM-DD date format';
+                if (moment().diff(date, 'days') < 0) {
+                    searchValueError = 'Unfortunately, we cant predict the future';
+                }
+
                 this.setState({
                     validSearchValue: false,
-                    searchValueError: 'Oh oh, use a YYYY-MM-DD date format'
+                    searchValueError
                 });
             }
         }
