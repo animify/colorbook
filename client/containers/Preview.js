@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import request from './../modules/Request';
-import Intro from './../components/Intro';
+import history from './../modules/History';
 
 class Preview extends React.Component {
     constructor(props) {
@@ -29,10 +29,14 @@ class Preview extends React.Component {
         request
             .get(`/api/shot/${id}`)
             .then((response) => {
-                this.setState({
-                    loading: false,
-                    shot: response.data.content
-                });
+                if (response.data.success) {
+                    this.setState({
+                        loading: false,
+                        shot: response.data.content
+                    });
+                } else {
+                    history.push('/404');
+                }
             });
     }
 
