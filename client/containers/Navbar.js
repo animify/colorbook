@@ -1,5 +1,6 @@
 import React from 'react';
 import minicons from 'minicons';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import history from './../modules/History';
@@ -119,7 +120,7 @@ class Navbar extends React.Component {
                         <form action="/" onSubmit={this.goToTimeline}>
                             <div className="input transparent">
                                 <span className={validSearchValue ? 'tooltip closed' : 'tooltip open invalid'} data-content={errorMessage} data-position="bottom left" data-text="small">
-                                    { isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder="Jump to date e.g 2017-12-03..." onChange={this.isTyping} value={searchValue} />)}
+                                    { isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder={`Jump to date e.g ${moment().format('YYYY-MM-DD')}...`} onChange={this.isTyping} value={searchValue} />)}
 
                                     <label htmlFor="jumpto" className="float-left">
                                         <div onClick={this.disableSearch} role="presentation" className={!isSearching ? 'hidden' : ''}>

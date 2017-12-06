@@ -52,6 +52,11 @@ ul.list, ol.list
       &.active
         a
           color color-primary
+  &.dashed
+    margin-top -.5rem
+    li:before
+        content '\2014'
+        margin-right .4rem
   &.divided
     li:first-child, .item:first-child
       border none

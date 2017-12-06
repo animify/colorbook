@@ -1,6 +1,8 @@
 import React from 'react';
+import DocumentMeta from 'react-document-meta';
 
 import request from './../modules/Request';
+import Helpers from './../modules/Helpers';
 import Intro from './../components/Intro';
 import ColorBlock from './../components/ColorBlock';
 
@@ -48,9 +50,21 @@ class Homepage extends React.Component {
         const shots = this.state.shots;
         const colorBlocks = this.renderColorBlocks(shots);
         const isLoading = this.state.loading;
+        const meta = {
+            title: 'The Colorbook',
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
+            canonical: Helpers.url,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'colorbook,dribbble,color,palette,homepage'
+                }
+            }
+        };
 
         return (
             <section className="contain">
+                <DocumentMeta {...meta} />
                 <div className="row">
                     <div className="col xs-12">
                         <Intro message="The latest &amp; most popular color palettes trending on Dribbble right now." />

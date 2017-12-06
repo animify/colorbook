@@ -3,6 +3,10 @@ import fs from 'fs';
 import moment from 'moment';
 
 class Helpers {
+    static get url() {
+        return 'http://colorbook.me';
+    }
+
     static get config() {
         return yaml.safeLoad(fs.readFileSync('./server/configs/config.yml', 'utf8'));
     }
