@@ -41,6 +41,20 @@ class Preview extends React.Component {
         const shot = this.state.shot;
         const isLoading = this.state.loading;
 
+        if (isLoading) {
+            return (
+                <section className="profile-contain loading">
+                    <div className="row">
+                        <div className="col xs-12">
+                            <div className="description">
+                                <div className="loader small dark" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
         return (
             <section className="profile-contain">
                 <div className="profile">
