@@ -1,9 +1,9 @@
 import React from 'react';
 import minicons from 'minicons';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import history from './../modules/History';
+import Helpers from './../modules/Helpers';
 import primaryLogo from '../images/colorbook-logo-primary.svg';
 
 class Navbar extends React.Component {
@@ -82,9 +82,9 @@ class Navbar extends React.Component {
         const date = this.state.searchValue;
 
         if (date) {
-            const dateValid = moment(date).isValid();
+            const dateValid = Helpers.validTimelineDate(date);
 
-            if (dateValid && moment(date).format('YYYY-MM-DD') === date) {
+            if (dateValid) {
                 history.push(`/timeline/${this.state.searchValue}`);
             } else {
                 this.setState({

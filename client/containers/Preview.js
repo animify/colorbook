@@ -29,7 +29,6 @@ class Preview extends React.Component {
         request
             .get(`/api/shot/${id}`)
             .then((response) => {
-                console.log(response.data.content);
                 this.setState({
                     loading: false,
                     shot: response.data.content

@@ -3,6 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import request from './../modules/Request';
+import Helpers from './../modules/Helpers';
 import history from '../modules/History';
 import Intro from './../components/Intro';
 import ColorBlock from './../components/ColorBlock';
@@ -36,7 +37,7 @@ class Timeline extends React.Component {
 
     getTimelineBlock(timelineData) {
         const colorBlocks = this.renderColorBlocks(timelineData.shots);
-        const id = Math.random().toString(36).substring(7);
+        const id = Helpers.randomId();
 
         return (
             <div className="row shots" key={`${id}-${timelineData.date}`}>
@@ -52,9 +53,9 @@ class Timeline extends React.Component {
         let currentDate = moment().format('YYYY-MM-DD');
 
         if (date) {
-            const dateValid = moment(date).isValid();
+            const dateValid = Helpers.validTimelineDate(date);
 
-            if (dateValid && moment(date).format('YYYY-MM-DD') === date) {
+            if (dateValid) {
                 currentDate = date;
             } else {
                 history.replace('/timeline');
@@ -71,7 +72,7 @@ class Timeline extends React.Component {
     }
 
     appendPreviousDay() {
-        const datePrevious = moment(this.state.currentDate).subtract(1, 'day').format('YYYY-MM-DD');
+        const datePrevious = Helpers.getPreviousDay(this.state.currentDate);
         this.appendTimeline(datePrevious);
     }
 
@@ -120,8 +121,8 @@ class Timeline extends React.Component {
         const isLoading = this.state.loading;
         const customDate = this.state.customDate;
         const currentDate = this.state.currentDate;
-        const daysAgo = moment().diff(moment(currentDate), 'days');
-        const message = (customDate && daysAgo > 0) ? `You've travelled back in time to the most popular palettes on Dribbble, ${daysAgo} days ago.` : 'A timeline of the most popular daily color palettes on Dribbble.';
+        const daysAgo = Helpers.daysAgo(currentDate);
+        const message = (customDate && daysAgo > 0) ? `You've travelled back in time to the most popular palettes on Dribbble, ${daysAgo} ${daysAgo > 1 ? 'days' : 'day'} ago.` : 'A timeline of the most popular daily color palettes on Dribbble.';
 
         return (
             <section className="contain">
@@ -137,8 +138,13 @@ class Timeline extends React.Component {
                     <div className="col xs-12">
                         <div className="previous-loader">
                             { !isLoading ?
-                                (<div role="presentation" onClick={this.appendPreviousDay} className="button primary">Load previous day...</div>) :
-                                (<div className="loader small dark" />)
+                                (<div role="presentation" onClick={this.appendPreviousDay} className="button primary">
+                                    Load previous day...
+                                </div>) :
+                                (<div role="presentation" onClick={this.appendPreviousDay} className="button primary loading">
+                                    <div className="loader" />
+                                    <span>Loading shots from {currentDate}...</span>
+                                </div>)
                             }
                         </div>
                     </div>
