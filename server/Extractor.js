@@ -24,7 +24,7 @@ class Extractor {
             id: shot.id,
             title: shot.title,
             url: shot.html_url,
-            imageUrl: shot.images.normal,
+            imageUrl: shot.images.hidpi || shot.images.normal,
             user_name: shot.user.username,
             user_pro: shot.user.pro,
             user_url: shot.user.html_url,
