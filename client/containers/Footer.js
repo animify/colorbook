@@ -29,10 +29,10 @@ class Footer extends React.Component {
                                     <Link to="/about">About</Link>
                                 </li>
                                 <li>
-                                    <a>Issues</a>
+                                    <a href="https://github.com/animify/colorbook/issues">Issues</a>
                                 </li>
                                 <li>
-                                    <a>@animify</a>
+                                    <a href="https://mansson.io">@animify</a>
                                 </li>
                             </ul>
                         </div>

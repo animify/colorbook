@@ -1,7 +1,6 @@
 import React from 'react';
 import Router from './routes/Router';
-
-require('./images/colorbook-logo-primary.png');
+import './images/favicon.png';
 
 const App = () => (
     <Router />

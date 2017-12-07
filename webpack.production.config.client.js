@@ -6,9 +6,6 @@ const rupture = require('rupture');
 
 module.exports = {
     entry: [
-        'react-hot-loader/patch',
-        'webpack-hot-middleware/client?http://0.0.0.0:3001/',
-        'webpack/hot/only-dev-server',
         './client/index.js',
     ],
 
@@ -18,7 +15,7 @@ module.exports = {
         publicPath: '/dist/',
     },
 
-    devtool: 'inline-source-map',
+    devtool: 'none',
 
     module: {
         rules: [
@@ -47,9 +44,27 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true
+            },
+            output: {
+                comments: false
+            }
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
         new webpack.LoaderOptionsPlugin({
             options: {
                 stylus: {
@@ -58,12 +73,5 @@ module.exports = {
                 context: '/'
             }
         }),
-    ],
-
-    devServer: {
-        host: 'localhost',
-        port: 3001,
-        historyApiFallback: true,
-        hot: true,
-    },
+    ]
 };

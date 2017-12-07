@@ -105,7 +105,7 @@ class Preview extends React.Component {
                                         <a href={shot.user_url}>Explore more shots by <strong>@{shot.user_name}</strong></a>
                                     </li>
                                     <li className="item">
-                                        <a>Download Adobe Photoshop (.aco) file</a>
+                                        <span className="disabled">Download Adobe Photoshop (.aco) palette file <strong className="text yellow">(coming soon)</strong></span>
                                     </li>
                                 </ul>
                             </div>
