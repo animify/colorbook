@@ -27,6 +27,7 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
+                NODE_ENV: JSON.stringify('development'),
                 BUILD_TARGET: JSON.stringify('server')
             }
         }),

@@ -4,11 +4,11 @@
     "description": "Color directory for Dribbble",
     "main": "server/server.js",
     "scripts": {
-        "start:server": "rimraf ./dist && webpack --config  webpack.config.server.js",
+        "start:server": "webpack --config  webpack.config.server.js",
         "start:client": "webpack-dev-server --config webpack.config.client.js",
         "build:client": "webpack --config webpack.production.config.client.js",
         "build:server": "webpack --config webpack.production.config.server.js",
-        "start": "rimraf ./dist && npm-run-all --parallel start:server start:client",
+        "start": "npm-run-all --parallel start:server start:client",
         "eslint": "eslint ."
     },
     "author": "Stefan Mansson <st.mansson@icloud.com> (http://mansson.io)",
