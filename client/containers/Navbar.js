@@ -120,34 +120,36 @@ class Navbar extends React.Component {
         return (
             <nav>
                 <Link className="inline" to="/"><img src={primaryLogo} alt="Colorbook primary logo" height="36" /></Link>
-                <ul className="list horizontal inline jump-to">
-                    <li>
-                        <form action="/" onSubmit={this.goToTimeline}>
-                            <div className="input transparent">
-                                <span className={validSearchValue ? 'tooltip closed' : 'tooltip open invalid'} data-content={errorMessage} data-position="bottom left" data-text="small">
-                                    { isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder={`Jump to date e.g ${moment().format('YYYY-MM-DD')}...`} onChange={this.isTyping} value={searchValue} />)}
+                <div className={isSearching ? 'actions searching' : 'actions'}>
+                    <ul className="list horizontal inline jump-to">
+                        <li>
+                            <form action="/" onSubmit={this.goToTimeline}>
+                                <div className="input transparent">
+                                    <span className={validSearchValue ? 'tooltip closed' : 'tooltip open invalid'} data-content={errorMessage} data-position="bottom left" data-text="small">
+                                        { isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder={`Jump to date e.g ${moment().format('YYYY-MM-DD')}...`} onChange={this.isTyping} value={searchValue} />)}
 
-                                    <label htmlFor="jumpto" className="float-left">
-                                        <div onClick={this.disableSearch} role="presentation" className={!isSearching ? 'hidden' : ''}>
-                                            <i data-minicon="x" />
-                                        </div>
-                                        <div onClick={this.enableSearch} role="presentation" className={isSearching ? 'hidden' : ''}>
-                                            <i data-minicon="search" />
-                                        </div>
-                                    </label>
-                                </span>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-                <ul className="list horizontal float-right">
-                    <li>
-                        <Link className={currentPath === '' ? 'active' : ''} to="/">Most popular</Link>
-                    </li>
-                    <li>
-                        <Link className={currentPath === 'timeline' ? 'active' : ''} to="/timeline">Timeline</Link>
-                    </li>
-                </ul>
+                                        <label htmlFor="jumpto" className="float-left">
+                                            <div onClick={this.disableSearch} role="presentation" className={!isSearching ? 'hidden' : ''}>
+                                                <i data-minicon="x" />
+                                            </div>
+                                            <div onClick={this.enableSearch} role="presentation" className={isSearching ? 'hidden' : ''}>
+                                                <i data-minicon="search" />
+                                            </div>
+                                        </label>
+                                    </span>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul className="list horizontal float-right">
+                        <li>
+                            <Link className={currentPath === '' ? 'active' : ''} to="/">Most popular</Link>
+                        </li>
+                        <li>
+                            <Link className={currentPath === 'timeline' ? 'active' : ''} to="/timeline">Timeline</Link>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         );
     }

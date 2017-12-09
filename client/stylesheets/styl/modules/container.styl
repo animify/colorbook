@@ -2,6 +2,8 @@
   center(standard-page-width, standard-page-padding)
   position relative
   cf()
+  +below('m')
+    padding 0 standard-mobile-page-padding
 
 .profile-contain
   center(profile-page-width, standard-page-padding)
@@ -9,11 +11,14 @@
   cf()
   &.loading
     margin-top 14rem
+  +below('m')
+    padding 0 standard-mobile-page-padding
 
 .content
     margin-top 4.3rem
     position relative
-
+    +below('m')
+        margin-top 7rem
 .bind
   height 100%
   width 100%

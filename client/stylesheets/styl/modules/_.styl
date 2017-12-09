@@ -8,7 +8,7 @@
     line-height 1em
 
 .user-pro
-    relative top -1px
+    relative top -1px left 2px
     padding .1rem .24rem .15rem .24rem
     text-transform uppercase
     font-size 13px
@@ -23,6 +23,7 @@
     fixed top left
     width 100%
     height 30rem
+    max-height 40%
     content ' '
     display block
     background linear-gradient(to bottom, #f6f6f6, transparent)
@@ -33,6 +34,12 @@ nav
     padding 1rem standard-page-padding
     width 100%
     z-index 1000
+    display flex
+    justify-content space-between
+    .actions
+        display flex
+        flex-grow 1
+        justify-content space-between
     .jump-to
         margin-left 1.6rem
         vertical-align top
@@ -63,6 +70,36 @@ nav
         &.active
             font-weight 500
             color color-heading
+    +below('m')
+        padding 1rem standard-mobile-page-padding
+        display block
+        .actions
+            width 100%
+            overflow-x auto
+            height 43px
+            display flex
+            justify-content center
+            .tooltip::before, .tooltip::after
+                display none !important
+            &::-webkit-scrollbar
+                width 0px
+                background transparent
+            & > *
+                display inline-block
+                vertical-align top
+            &.searching
+                .list.horizontal.float-right
+                    display none !important
+        a.inline
+            display block
+            width 100%
+            text-align center
+        .jump-to
+            margin-left 0
+        .list.horizontal
+            float none
+            & + .list.horizontal
+                margin-left 1rem
 
 .content-intro
     width 70%
@@ -77,6 +114,11 @@ nav
     h2
         font-weight 400
         line-height 1.4em
+    +below('m')
+        width 100%
+        padding 4rem 0 2rem 0
+        h2
+            font-size 2.4rem
 
 .shots
     .date
@@ -99,8 +141,8 @@ nav
         position relative
         padding-left 4.2rem
         h5
-            line-height 1em
-            margin-bottom .4rem
+            line-height 1.2em
+            margin-bottom .2rem
             font-weight 500
         a
             color text-default
@@ -130,6 +172,19 @@ nav
             border-radius 50%
             border 3px solid #fff
             padding 0 .5rem
+    +below('m')
+        flex-direction column
+        .description
+            width 100%
+        .colors
+            display block
+            float none
+            width 100%
+            white-space nowrap
+            margin-top 2rem
+            .color
+                margin-left 0 !important
+                width 20%
 
 .previous-loader
     padding 3rem 0
@@ -201,6 +256,21 @@ footer
         p + p
             margin-top .6rem
 
+    +below('m')
+        padding 4rem 0 0 0
+        .description
+            padding 0 0 3rem 4.3rem
+            img
+                height 53px
+                margin-right 1rem
+            h3
+                font-size font-size-h4
+        .color
+            span
+                width 3rem
+                height 3rem
+            p
+                font-size .8rem
 .error-link
     text-align center
     margin-bottom 3rem
