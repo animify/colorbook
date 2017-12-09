@@ -1,5 +1,5 @@
 {
-    "name": "color-directory",
+    "name": "colorbook",
     "version": "1.0.0",
     "description": "Color directory for Dribbble",
     "main": "server/server.js",
