@@ -34,7 +34,7 @@ class Extractor {
         };
 
         return new Promise(((resolve, reject) => {
-            Extractor.extractColor(normalizedData.imageUrlHidpi)
+            Extractor.extractColor(normalizedData.imageUrl)
                 .then((colors) => {
                     normalizedData.colors = colors.map(color => color.hex());
                     resolve(normalizedData);
