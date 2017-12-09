@@ -57,7 +57,7 @@ class Homepage extends React.Component {
             meta: {
                 charset: 'utf-8',
                 name: {
-                    keywords: 'colorbook,dribbble,color,palette,homepage'
+                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
                 }
             }
         };

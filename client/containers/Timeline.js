@@ -1,4 +1,5 @@
 import React from 'react';
+import DocumentMeta from 'react-document-meta';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
@@ -123,9 +124,21 @@ class Timeline extends React.Component {
         const currentDate = this.state.currentDate;
         const daysAgo = Helpers.daysAgo(currentDate);
         const message = (customDate && daysAgo > 0) ? `You've travelled back in time to the most popular palettes on Dribbble, ${daysAgo} ${daysAgo > 1 ? 'days' : 'day'} ago.` : 'A timeline of the most popular daily color palettes on Dribbble.';
+        const meta = {
+            title: 'Timeline - The Colorbook',
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
+            canonical: `${Helpers.url}/timeline`,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
+                }
+            }
+        };
 
         return (
             <section className="contain">
+                <DocumentMeta {...meta} />
                 <div className="row">
                     <div className="col xs-12">
                         <Intro message={message} />

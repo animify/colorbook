@@ -6,12 +6,12 @@ dark-tooltip-color = #000
   &:before
     background-color #fff
     position absolute
-    z-index 2
+    z-index 20
     width .8rem
     height .8rem
     content ' '
     font-size 1rem
-    box-shadow 1px 1px 0 0 border-grey
+    box-shadow 0 1px 4px 0 box-shadow-grey
     transform-origin center top
     transform rotate(45deg) scale(0)
     opacity 0
@@ -28,7 +28,7 @@ dark-tooltip-color = #000
     text-align left
     border-radius border-radius-normal
     padding .75em 1em
-    box-shadow 0 1px 2px 0 box-shadow-grey
+    box-shadow 0 1px 4px 0 box-shadow-grey
     transform scale(0)
     cursor default
     pointer-events none
@@ -49,14 +49,17 @@ dark-tooltip-color = #000
       color #fff
   &.invalid
     &:before
-      box-shadow none !important
+      box-shadow 0 1px 4px transparentify(color-red, .5)
       background-color color-red
+      top 6px !important
     &:after
       border-color color-red
       background-color color-red
       color #fff
       padding 1em 1em
       z-index 200
+      top 6px !important
+      box-shadow 0 1px 4px transparentify(color-red, .5)
   &:not(.closed):hover, &.open
     &:before
       transform rotate(45deg) scale(1)
@@ -130,7 +133,7 @@ dark-tooltip-color = #000
 
   &[data-position="bottom right"]
     &:before
-      right arrow-indent
+      right .8rem
     &:after
       right 0
       left auto

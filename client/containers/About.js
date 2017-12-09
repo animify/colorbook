@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import DocumentMeta from 'react-document-meta';
 import minicons from 'minicons';
 
 import Intro from './../components/Intro';
+import Helpers from './../modules/Helpers';
 
 class About extends React.Component {
     componentDidMount() {
@@ -11,8 +12,21 @@ class About extends React.Component {
     }
 
     render() {
+        const meta = {
+            title: 'About - The Colorbook',
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
+            canonical: `${Helpers.url}/about`,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
+                }
+            }
+        };
+
         return (
             <section className="contain about-page">
+                <DocumentMeta {...meta} />
                 <div className="row">
                     <div className="col xs-12">
                         <Intro title="About" message="A day by day timeline of the most popular color palettes on Dribbble." />

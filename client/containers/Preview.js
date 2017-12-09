@@ -1,7 +1,9 @@
 import React from 'react';
+import DocumentMeta from 'react-document-meta';
 import PropTypes from 'prop-types';
 
 import request from './../modules/Request';
+import Helpers from './../modules/Helpers';
 import history from './../modules/History';
 
 class Preview extends React.Component {
@@ -43,10 +45,22 @@ class Preview extends React.Component {
     render() {
         const shot = this.state.shot;
         const isLoading = this.state.loading;
+        const meta = {
+            title: `${shot.title} - The Colorbook`,
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
+            canonical: `${Helpers.url}/${shot.id}`,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
+                }
+            }
+        };
 
         if (isLoading) {
             return (
                 <section className="profile-contain loading">
+                    <DocumentMeta {...meta} />
                     <div className="row">
                         <div className="col xs-12">
                             <div className="description">
@@ -60,6 +74,7 @@ class Preview extends React.Component {
 
         return (
             <section className="profile-contain">
+                <DocumentMeta {...meta} />
                 <div className="profile">
                     <div className="row">
                         <div className="col xs-12">
