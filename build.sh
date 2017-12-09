@@ -40,6 +40,11 @@ COPY_HTML
 echo -e "\e[37m\e[42m Copy completed.\033[0m"
 elif [[ $1 == "db" ]]; then
 COPY_HTML
+elif [[ $1 == "prod" ]]; then
+DESTROY_DB
+BUILD_CLIENT
+COPY_HTML
+cp -R build/* /var/www/colorbook.me
 echo -e "\e[37m\e[42m Database recreated.\033[0m"
 elif [ $# -eq 0 ]; then
 DESTROY_DB
