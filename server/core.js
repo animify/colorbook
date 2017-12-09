@@ -1,9 +1,10 @@
 import http from 'http';
 import app from './server';
+import Helpers from './common/helpers';
 
 const server = http.createServer(app);
 let currentApp = app;
-server.listen(3001);
+server.listen(Helpers.serverConfig.ports.development);
 
 if (module.hot) {
     module.hot.accept('./server', () => {

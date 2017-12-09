@@ -1,0 +1,3 @@
+ports:
+    production: 3000
+    development: 3002

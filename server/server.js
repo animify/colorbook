@@ -1,8 +1,13 @@
+/* eslint global-require: "off" */
+/* eslint no-console: "off" */
+
 import express from 'express';
 import Webpack from 'webpack';
+
 import Dribbble from './Dribbble';
 import Endpoint from './Endpoint';
 import Db from './database/Db';
+import Helpers from './common/helpers';
 
 const path = require('path');
 
@@ -64,6 +69,10 @@ app.get('/api/shot/:id', (req, res) => {
 if (process.env.NODE_ENV === 'development') {
     app.get('*', (req, res) => {
         res.sendFile(path.resolve('client/local.html'));
+    });
+} else {
+    app.listen(Helpers.serverConfig.ports.production, '0.0.0.0', () => {
+        console.log(`The Colorbook production server running on port ${Helpers.serverConfig.ports.production}`);
     });
 }
 

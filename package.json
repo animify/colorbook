@@ -6,9 +6,10 @@
     "scripts": {
         "start:server": "webpack --config  webpack.config.server.js",
         "start:client": "webpack-dev-server --config webpack.config.client.js",
-        "build:client": "webpack --config webpack.production.config.client.js",
-        "build:server": "webpack --config webpack.production.config.server.js",
         "start": "npm-run-all --parallel start:server start:client",
+        "build:client": "webpack --config webpack.production.config.client.js",
+        "build": "./build.sh",
+        "production": "./node_modules/babel-cli/bin/babel-node.js --presets node6 ./server/server",
         "eslint": "eslint ."
     },
     "author": "Stefan Mansson <st.mansson@icloud.com> (http://mansson.io)",
@@ -44,6 +45,7 @@
         "react-router-dom": "^4.2.2",
         "rupture": "^0.6.2",
         "socket.io": "^1.7.2",
+        "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony",
         "webcomponents.js": "^0.7.23",
         "webpack": "^3.5.6",
         "webpack-dev-middleware": "^1.12.0",
@@ -55,6 +57,7 @@
         "babel-eslint": "^4.1.6",
         "babel-jscs": "^2.0.5",
         "babel-loader": "^6.4.1",
+        "babel-minify-webpack-plugin": "^0.2.0",
         "babel-preset-env": "^1.6.0",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-react": "^6.24.1",

@@ -78,7 +78,7 @@ class Preview extends React.Component {
                         <div className="col xs-12">
                             <div className="profile-shot">
                                 <p className="small-title">Original shot</p>
-                                <img src={shot.imageUrl} alt={`${shot.title} shot`} />
+                                <img src={shot.imageUrlHidpi} alt={`${shot.title} shot`} />
                             </div>
                         </div>
                     </div>

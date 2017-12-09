@@ -1,5 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const nib = require('nib');
+const jeet = require('jeet');
+const rupture = require('rupture');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -44,6 +48,15 @@ module.exports = {
         new webpack.HashedModuleIdsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new MinifyPlugin(),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                stylus: {
+                    use: [nib(), jeet(), rupture()]
+                },
+                context: '/'
+            }
         }),
     ]
 };

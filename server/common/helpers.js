@@ -4,11 +4,15 @@ import moment from 'moment';
 
 class Helpers {
     static get url() {
-        return 'http://colorbook.me';
+        return 'https://colorbook.me';
     }
 
     static get config() {
         return yaml.safeLoad(fs.readFileSync('./server/configs/config.yml', 'utf8'));
+    }
+
+    static get serverConfig() {
+        return yaml.safeLoad(fs.readFileSync('./server/configs/server-config.yml', 'utf8'));
     }
 
     static buildError(status, message) {
