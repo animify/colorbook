@@ -27,6 +27,8 @@
     content ' '
     display block
     background linear-gradient(to bottom, #f6f6f6, transparent)
+    +below('m')
+        display none
 
 nav
     background-color #fff
@@ -73,6 +75,7 @@ nav
     +below('m')
         padding 1rem standard-mobile-page-padding
         display block
+        border-bottom 1px solid border-grey
         .actions
             width 100%
             overflow-x auto
