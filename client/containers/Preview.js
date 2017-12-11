@@ -80,7 +80,7 @@ class Preview extends React.Component {
                         <div className="col xs-12">
                             <div className="description">
                                 <div className="inline">
-                                    <img className="avatar" src={shot.user_avatar} height="60" alt="User avatar" />
+                                    <img className="avatar" src={shot.user_avatar} height="66" alt="User avatar" />
                                 </div>
                                 <div className="inline">
                                     <h3>{shot.title}</h3>

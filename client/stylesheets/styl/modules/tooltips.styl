@@ -13,7 +13,7 @@ dark-tooltip-color = #000
     font-size 1rem
     box-shadow 0 1px 4px 0 box-shadow-grey
     transform-origin center top
-    transform rotate(45deg) scale(0)
+    transform rotate(50deg) scale(0)
     opacity 0
   &:after
     content attr(data-content)
@@ -140,6 +140,14 @@ dark-tooltip-color = #000
       transform-origin right top
     +below('m')
         &:before
-            right 1.24rem
+          left calc(50% - .15rem)
+          right auto
+          transform-origin center top
+          transform translateX(-50%) scale(0)
         &:after
-            right .4rem
+          left calc(50% - .15rem)
+          right auto
+          transform-origin center top
+          transform translateX(-50%) scale(0)
+        &:hover:after
+          transform translateX(-50%) scale(1)

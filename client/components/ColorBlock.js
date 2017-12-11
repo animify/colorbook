@@ -7,7 +7,7 @@ const ColorBlock = ({ shot }) => (
         <div className="color-block">
             <div className="description">
                 <div className="inline">
-                    <img className="avatar" src={shot.user_avatar} height="52" alt={shot.user_name} />
+                    <img className="avatar" src={shot.user_avatar} height="54" alt={shot.user_name} />
                 </div>
                 <div className="inline">
                     <h5><Link to={`/s/${shot.id}`}>{ shot.title }</Link></h5>
