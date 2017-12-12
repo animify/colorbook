@@ -64,7 +64,7 @@ class Preview extends React.Component {
                     <div className="row">
                         <div className="col xs-12">
                             <div className="description">
-                                <div className="loader small dark" />
+                                <div className="loader small" />
                             </div>
                         </div>
                     </div>

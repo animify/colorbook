@@ -151,10 +151,10 @@ class Timeline extends React.Component {
                     <div className="col xs-12">
                         <div className="previous-loader">
                             { !isLoading ?
-                                (<div role="presentation" onClick={this.appendPreviousDay} className="button black">
+                                (<div role="presentation" onClick={this.appendPreviousDay} className="button dark">
                                     Load previous day...
                                 </div>) :
-                                (<div role="presentation" onClick={this.appendPreviousDay} className="button black loading">
+                                (<div role="presentation" onClick={this.appendPreviousDay} className="button dark loading">
                                     <div className="loader" />
                                     <span>Analyzing shots from {currentDate}...</span>
                                 </div>)

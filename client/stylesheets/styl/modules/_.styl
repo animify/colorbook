@@ -11,8 +11,8 @@
     vertical-align top
     text-transform uppercase
     font-size 12px
-    border-radius border-radius-normal
-    background-color #000
+    border-radius 2px
+    background-color #3b3b3b
     color #fff
     font-weight 500
     line-height 1em
@@ -22,19 +22,8 @@
     padding 0 4px
     margin-left 3px
 
-.fade
-    fixed top left
-    width 100%
-    height 30rem
-    max-height 40%
-    content ' '
-    display block
-    background linear-gradient(to bottom, #f6f6f6, transparent)
-    +below('m')
-        display none
-
 nav
-    background-color #fff
+    background-color #1d1d1d
     fixed top left
     padding 1rem standard-page-padding
     width 100%
@@ -78,7 +67,6 @@ nav
     +below('m')
         padding 1rem standard-mobile-page-padding
         display block
-        border-bottom 1px solid border-grey
         .actions
             width 100%
             overflow-x auto
@@ -109,7 +97,7 @@ nav
 
 .content-intro
     width 70%
-    padding 7rem 0 4rem 0
+    padding 7rem 0 5rem 0
     small
         text-transform uppercase
         color color-primary
@@ -128,16 +116,20 @@ nav
 
 .shots
     .date
-        color text-disabled
-        font-weight 400
-        margin-top 1.2rem
+        color color-heading
+        font-weight 600
+        font-size 1.6rem
+        border-bottom 2px solid border-grey
+        padding-bottom .6rem
+    & + .shots
+        margin-top 4rem
 
 .color-col
     & + .color-col .color-block
         border-top 1px solid border-grey
 
 .color-block
-    padding 2rem 0
+    padding 1.5rem 0
     display flex
     .avatar
         border-radius border-radius-normal
@@ -145,7 +137,7 @@ nav
         absolute left top
     .description
         position relative
-        padding-left 4.4rem
+        padding-left 5rem
         a
             color text-default
             &:hover
@@ -153,21 +145,22 @@ nav
         h5
             line-height 1.3em
             margin-bottom .2rem
-            font-weight 500
+            font-weight 400
             a
                 color color-heading
     .colors
         display flex
         margin-left auto
+        padding 3px 0
         &:hover
             .color + .color
-                margin-left .1rem
+                margin-left .4rem
     .color
         display inline-block
         will-change margin-left
         transition margin-left 140ms ease
         & + .color
-            margin-left -.8rem
+            margin-left -.9rem
         p
             padding .5rem 0
             display none
@@ -178,7 +171,7 @@ nav
             display block
             margin 0 auto
             border-radius 50%
-            border 3px solid #fff
+            border 2px solid #fff
             padding 0 .5rem
     +below('m')
         flex-direction column
@@ -195,13 +188,14 @@ nav
                 width 20%
 
 .previous-loader
-    padding 3rem 0
-    text-align center
-    border-top 1px solid border-grey
+    padding 2rem 0 0 0
 
 footer
     padding 3rem 0
-    text-align center
+    border-top 2px solid border-grey
+    margin-top 5rem
+    strong
+        color #fff
     p
         margin-bottom .4rem
     small
@@ -213,7 +207,7 @@ footer
     .muted
         margin-top 1.2rem
     .list
-        margin-top 1.6rem
+        text-align right
 
 .profile
     padding 5rem 0 0 0
@@ -223,15 +217,14 @@ footer
             color color-primary
     .description
         position relative
-        padding 0 0 3rem 5.3rem
+        padding 0 0 3rem 5.9rem
         .inline
             vertical-align middle
         .avatar
             border-radius border-radius-normal
-            margin-right 1.5rem
             absolute left top
         h3
-            line-height 1.3em
+            line-height 1.2em
             font-weight 500
             margin-bottom .2rem
 

@@ -66,6 +66,14 @@
     color text-default
     background-color darken(background-light-grey, 4%)
     text-decoration none
+  &.dark
+    background-color #212121
+    width 100%
+    display block
+    padding 1em 0
+    &:hover
+        background-color lighten(#212121, 1%)
+        color #fff
   &.disabled, &[disabled]
     @extends .disabled
   &.loading

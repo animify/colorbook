@@ -15,7 +15,7 @@ const Profile = ({ shot }) => (
             </div>
             <div className="colors">
                 {shot.colors.map(color => (
-                    <div className="color tooltip dark" key={color.substring(1)} data-content={color} data-position="bottom right" data-text="small">
+                    <div className="color" key={color.substring(1)}>
                         <span style={{ backgroundColor: color }} />
                         <p>{ color }</p>
                     </div>

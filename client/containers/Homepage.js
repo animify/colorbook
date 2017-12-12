@@ -73,7 +73,7 @@ class Homepage extends React.Component {
                 <div className="row shots">
                     { !isLoading ?
                         colorBlocks :
-                        (<div className="loader small dark" />)
+                        (<div className="loader small" />)
                     }
                 </div>
             </section>
