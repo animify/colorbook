@@ -1,3 +1,7 @@
+.copy-input
+    fixed top -10rem left -10rem
+    background-color transparent
+
 .small-title
     text-transform uppercase
     font-size font-size-small
@@ -154,13 +158,14 @@ nav
         padding 3px 0
         &:hover
             .color + .color
-                margin-left .4rem
+                margin-left .5rem
     .color
         display inline-block
         will-change margin-left
-        transition margin-left 140ms ease
+        transition margin-left 140ms ease, transform 140ms ease
+        cursor pointer
         & + .color
-            margin-left -.9rem
+            margin-left -1rem
         p
             padding .5rem 0
             display none
@@ -173,6 +178,9 @@ nav
             border-radius 50%
             border 2px solid #fff
             padding 0 .5rem
+        &:hover
+            transform translateY(-5px)
+
     +below('m')
         flex-direction column
         .description

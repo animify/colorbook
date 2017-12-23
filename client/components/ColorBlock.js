@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const ColorBlock = ({ shot }) => (
+const ColorBlock = ({ copy, shot }) => (
     <div className="col xs-12 color-col">
         <div className="color-block">
             <div className="description">
@@ -15,8 +15,8 @@ const ColorBlock = ({ shot }) => (
                 </div>
             </div>
             <div className="colors">
-                {shot.colors.map(color => (
-                    <div className="color tooltip" key={color.substring(1)} data-content={color} data-position="bottom right" data-text="small">
+                {shot.colors.map((color, i) => (
+                    <div className="color tooltip" role="presentation" key={color.substring(1)} data-content={`${color}`} data-position="bottom right" data-text="small" onClick={() => copy(color)}>
                         <span style={{ backgroundColor: color }} />
                         <p>{ color }</p>
                     </div>
@@ -27,6 +27,7 @@ const ColorBlock = ({ shot }) => (
 );
 
 ColorBlock.propTypes = {
+    copy: PropTypes.func.isRequired,
     shot: PropTypes.shape({
         id: PropTypes.number,
         imageUrl: PropTypes.string,

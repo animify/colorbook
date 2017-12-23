@@ -16,11 +16,13 @@ class Timeline extends React.Component {
         this.state = {
             currentDate: null,
             loading: false,
+            copying: false,
             customDate: false,
             content: []
         };
 
         this.appendPreviousDay = this.appendPreviousDay.bind(this);
+        this.renderColorBlocks = this.renderColorBlocks.bind(this);
     }
 
     componentDidMount() {
@@ -110,7 +112,7 @@ class Timeline extends React.Component {
     renderColorBlocks(shots) {
         if (shots.length > 0) {
             return shots.map(shot => (
-                <ColorBlock key={shot.id} shot={shot} />
+                <ColorBlock key={shot.id} shot={shot} copy={Helpers.copy} />
             ));
         }
 
@@ -139,6 +141,7 @@ class Timeline extends React.Component {
         return (
             <section className="contain">
                 <DocumentMeta {...meta} />
+                <input className="copy-input" type="text" ref={(input) => { this.copyInput = input; }} />
                 <div className="row">
                     <div className="col xs-12">
                         <Intro message={message} />

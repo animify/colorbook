@@ -39,7 +39,7 @@ class Homepage extends React.Component {
     renderColorBlocks(shots) {
         if (shots.length > 0) {
             return shots.map(shot => (
-                <ColorBlock key={shot.id} shot={shot} />
+                <ColorBlock key={shot.id} shot={shot} copy={Helpers.copy} />
             ));
         }
 

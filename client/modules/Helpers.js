@@ -19,6 +19,16 @@ class Helpers {
     static getPreviousDay(date) {
         return moment(date).subtract(1, 'day').format('YYYY-MM-DD');
     }
+
+    static copy(content) {
+        const inputArea = document.createElement('input');
+        const appRoot = document.getElementById('app');
+        appRoot.appendChild(inputArea);
+        inputArea.value = content;
+        inputArea.select();
+        document.execCommand('copy');
+        appRoot.removeChild(inputArea);
+    }
 }
 
 export default Helpers;
