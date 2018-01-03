@@ -16,7 +16,7 @@ const ColorBlock = ({ copy, shot }) => (
             </div>
             <div className="colors">
                 {shot.colors.map((color, i) => (
-                    <div className="color tooltip" role="presentation" key={color.substring(1)} data-content={`${color}`} data-position="bottom right" data-text="small" onClick={() => copy(color)}>
+                    <div className="color tooltip" role="presentation" key={color.substring(1)} data-content={`Copy ${color}`} data-position="bottom right" data-text="small" onClick={() => copy(color)}>
                         <span style={{ backgroundColor: color }} />
                         <p>{ color }</p>
                     </div>

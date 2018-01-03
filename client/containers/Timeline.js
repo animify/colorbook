@@ -159,7 +159,7 @@ class Timeline extends React.Component {
                                 </div>) :
                                 (<div role="presentation" onClick={this.appendPreviousDay} className="button dark loading">
                                     <div className="loader" />
-                                    <span>Analyzing shots from {currentDate}...</span>
+                                    <span>Analyzing shots from {moment(currentDate).subtract(1, 'day').format('YYYY-MM-DD')}...</span>
                                 </div>)
                             }
                         </div>
