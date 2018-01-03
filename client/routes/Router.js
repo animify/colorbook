@@ -8,7 +8,6 @@ import history from './../modules/History';
 const BasicRouter = () => (
     <Router history={history}>
         <div id="colorbook">
-            <span className="fade" />
             <Navbar />
             <div className="content">
                 <HomeRoute />

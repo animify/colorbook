@@ -6,9 +6,11 @@ import Preview from '../containers/Preview';
 import About from '../containers/About';
 import ErrorPage from '../containers/ErrorPage';
 import tracker from './../modules/tracker';
+import CopiedNotification from './../components/CopiedNotification';
 
 const HomeRoute = () => (
     <div>
+        <CopiedNotification color="red" />
         <Route exact path="/" component={tracker(Homepage)} />
         <Route exact path="/timeline/:date?" component={tracker(Timeline)} />
         <Route exact path="/s/:id" component={tracker(Preview)} />

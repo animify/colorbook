@@ -1,3 +1,20 @@
+.alert
+    position fixed
+    width 100%
+    text-align center
+    background-color border-grey
+    color #fff
+    z-index 2000
+    display none
+    height 2.8rem
+    &.visible
+        display flex
+        align-items center
+        justify-content center
+    p
+        color text-default
+        font-size font-size-small
+
 .copy-input
     fixed top -10rem left -10rem
     background-color transparent
@@ -176,7 +193,7 @@ nav
             display block
             margin 0 auto
             border-radius 50%
-            border 2px solid #fff
+            // border 2px solid #fff
             padding 0 .5rem
         &:hover
             transform translateY(-5px)
