@@ -16,13 +16,13 @@ class Timeline extends React.Component {
         this.state = {
             currentDate: null,
             loading: false,
-            copying: false,
             customDate: false,
             content: []
         };
 
         this.appendPreviousDay = this.appendPreviousDay.bind(this);
         this.renderColorBlocks = this.renderColorBlocks.bind(this);
+        this.copy = this.copy.bind(this);
     }
 
     componentDidMount() {
@@ -31,11 +31,24 @@ class Timeline extends React.Component {
         this.loadDate(dateParam, !!dateParam);
     }
 
-    componentWillReceiveProps(state) {
-        const dateParam = state.match.params.date;
-        if (dateParam !== this.state.currentDate) {
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.loading === this.state.loading)
+            return false;
+
+        return true;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const dateParam = nextProps.match.params.date;
+
+        if (dateParam !== undefined && dateParam !== this.state.currentDate) {
             this.loadDate(dateParam, !!dateParam);
         }
+    }
+
+    copy(color) {
+        this.props.show(color);
+        Helpers.copy(color);
     }
 
     getTimelineBlock(timelineData) {
@@ -112,7 +125,7 @@ class Timeline extends React.Component {
     renderColorBlocks(shots) {
         if (shots.length > 0) {
             return shots.map(shot => (
-                <ColorBlock key={shot.id} shot={shot} copy={Helpers.copy} />
+                <ColorBlock key={shot.id} shot={shot} copy={this.copy} />
             ));
         }
 
@@ -171,6 +184,7 @@ class Timeline extends React.Component {
 }
 
 Timeline.propTypes = {
+    show: PropTypes.func.isRequired,
     match: PropTypes.shape({
         params: PropTypes.shape({
             date: PropTypes.node,

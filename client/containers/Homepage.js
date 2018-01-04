@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DocumentMeta from 'react-document-meta';
 
 import request from './../modules/Request';
@@ -87,5 +88,9 @@ class Homepage extends React.Component {
         );
     }
 }
+
+Homepage.propTypes = {
+    show: PropTypes.func.isRequired
+};
 
 export default Homepage;

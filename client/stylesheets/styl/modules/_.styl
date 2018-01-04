@@ -5,15 +5,29 @@
     background-color border-grey
     color #fff
     z-index 2000
-    display none
-    height 2.8rem
+    pointer-events none
+    height 0
+    transition max-height 140ms ease, opacity 140ms ease
+    transform translateZ(0)
+    opacity 0
+    will-change max-height, opacity
+    max-height 0
+    p
+        transition none
+        opacity 0
+        color text-default
+        font-size font-size-small
     &.visible
         display flex
         align-items center
         justify-content center
-    p
-        color text-default
-        font-size font-size-small
+        pointer-events auto
+        height 2.8rem
+        max-height 3rem
+        opacity 1
+        p
+            transition opacity 200ms ease
+            opacity 1
 
 .copy-input
     fixed top -10rem left -10rem
