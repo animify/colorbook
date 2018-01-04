@@ -14,6 +14,8 @@ class Homepage extends React.Component {
             shots: [],
             loading: false,
         };
+
+        this.copy = this.copy.bind(this);
     }
 
     componentDidMount() {
@@ -36,10 +38,15 @@ class Homepage extends React.Component {
             });
     }
 
+    copy(color) {
+        this.props.show(color);
+        Helpers.copy(color);
+    }
+
     renderColorBlocks(shots) {
         if (shots.length > 0) {
             return shots.map(shot => (
-                <ColorBlock key={shot.id} shot={shot} copy={Helpers.copy} />
+                <ColorBlock key={shot.id} shot={shot} copy={this.copy} />
             ));
         }
 

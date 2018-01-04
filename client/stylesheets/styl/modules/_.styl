@@ -174,8 +174,13 @@ nav
         margin-left auto
         padding 3px 0
         &:hover
-            .color + .color
-                margin-left .5rem
+            .color
+                span
+                    border 2px solid rgba(255, 255, 255, .2)
+                &:active span
+                    border-color rgba(255, 255, 255, 1) !important
+                & + .color
+                    margin-left .5rem
     .color
         display inline-block
         will-change margin-left
@@ -193,10 +198,12 @@ nav
             display block
             margin 0 auto
             border-radius 50%
-            // border 2px solid #fff
+            transition border-color 140ms ease
+            will-change border-color
             padding 0 .5rem
         &:hover
             transform translateY(-5px)
+
 
     +below('m')
         flex-direction column

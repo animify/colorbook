@@ -6,6 +6,7 @@ class CopiedNotification extends React.Component {
     constructor(props) {
         super(props);
 
+        this.notificationTimer = 0;
         this.state = {
             color: this.props.color,
             visible: false
@@ -15,18 +16,29 @@ class CopiedNotification extends React.Component {
         this.hideNotification = this.hideNotification.bind(this);
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.showNotification();
-        }, 2000);
+    showNotification(color) {
+        clearTimeout(this.notificationTimer);
+
+        this.notificationTimer = setTimeout(() => this.hideNotification(), 5000);
+
+        this.setState({
+            color,
+            visible: true
+        });
     }
 
-    showNotification() {
-        this.setState({ visible: true });
+    componentWillReceiveProps(state) {
+        const color = state.color;
+
+        if (color !== this.state.color) {
+            this.showNotification(color);
+        }
     }
 
     hideNotification() {
-        this.setState({ visible: false });
+        this.setState({
+            visible: false
+        });
     }
 
     render() {
