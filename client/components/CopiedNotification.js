@@ -46,7 +46,7 @@ class CopiedNotification extends React.Component {
 
         return (
             <section className={ visible ? 'alert visible' : 'alert' }>
-                <p><strong>{ color }</strong> copied to clipboard</p>
+                <p><span className="color" style={{ backgroundColor: color }}></span><strong>{ color }</strong> copied to clipboard</p>
             </section>
         );
     }
