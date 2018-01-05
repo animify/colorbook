@@ -1,21 +1,16 @@
 import React from 'react';
-import tinycolor from 'tinycolor2';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Helpers from './../modules/Helpers';
 
 const mouseEnter = (e) => {
     const style = e.target.style;
-    style.borderColor = borderColor(style.backgroundColor, true);
+    style.borderColor = Helpers.borderColor(style.backgroundColor, true);
 }
 
 const mouseLeave = (e) => {
     const style = e.target.style;
-    style.borderColor = borderColor(style.backgroundColor, false);
-}
-
-const borderColor = (color, hovering) => {
-    const amount = hovering ? 40 : 20;
-    return tinycolor(color).lighten(amount).toString();
+    style.borderColor = Helpers.borderColor(style.backgroundColor, false);
 }
 
 const ColorBlock = ({ copy, shot }) => (
@@ -32,8 +27,8 @@ const ColorBlock = ({ copy, shot }) => (
             </div>
             <div className="colors">
                 {shot.colors.map((color, i) => (
-                    <div className="color tooltip" role="presentation" key={color.substring(1)} data-content={`Copy ${color}`} data-position="bottom right" data-text="small" onClick={() => copy(color)}>
-                        <span onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: borderColor(color, false) }} />
+                    <div className="color tooltip" role="presentation" key={color.substring(1)} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny" onClick={() => copy(color)}>
+                        <span onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
                         <p>{ color }</p>
                     </div>
                 ))}

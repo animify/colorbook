@@ -1,6 +1,12 @@
 import moment from 'moment';
+import tinycolor from 'tinycolor2';
 
 class Helpers {
+    static borderColor(color, hovering) {
+        const amount = hovering ? 40 : 20;
+        return tinycolor(color).lighten(amount).toString();
+    }
+
     static daysAgo(date) {
         return moment().diff(moment(date), 'days');
     }

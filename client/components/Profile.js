@@ -1,31 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helpers from './../modules/Helpers';
 
-const Profile = ({ shot }) => (
+const mouseEnter = (e) => {
+    const style = e.target.style;
+    style.borderColor = Helpers.borderColor(style.backgroundColor, true);
+}
+
+const mouseLeave = (e) => {
+    const style = e.target.style;
+    style.borderColor = Helpers.borderColor(style.backgroundColor, false);
+}
+
+const Profile = ({ copy, shot }) => (
     <div className="col xs-12 color-col">
-        <div className="color-block">
-            <div className="description">
-                <div className="inline">
-                    <img className="avatar" src={shot.user_avatar} height="52" alt={shot.user_name} />
-                </div>
-                <div className="inline">
-                    <h5><a href={shot.url}>{ shot.title }</a></h5>
-                    <a href={shot.user_url}>@{ shot.user_name }</a>
-                </div>
+        <p className="small-title">Color palette</p>
+        {shot.colors.map(color => (
+            <div className="color" key={color.substring(1)}>
+                <span onClick={() => copy(color)} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
+                <p>{ color }</p>
             </div>
-            <div className="colors">
-                {shot.colors.map(color => (
-                    <div className="color" key={color.substring(1)}>
-                        <span style={{ backgroundColor: color }} />
-                        <p>{ color }</p>
-                    </div>
-                ))}
-            </div>
-        </div>
+        ))}
     </div>
 );
 
 Profile.propTypes = {
+    copy: PropTypes.func.isRequired,
     shot: PropTypes.shape({
         id: PropTypes.number,
         imageUrl: PropTypes.string,

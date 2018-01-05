@@ -198,8 +198,12 @@ nav
     .color
         display inline-block
         will-change margin-left
-        transition margin-left 140ms ease, transform 140ms ease
+        transition margin-left 140ms ease
         cursor pointer
+        &::before
+            margin-top .9rem !important
+        &::after
+            margin-top 1.1rem !important
         & + .color
             margin-left -1rem
         p
@@ -207,17 +211,19 @@ nav
             display none
         span
             content ' '
+            position relative
             width 3rem
             height 3rem
             display block
             margin 0 auto
             border-radius 50%
-            transition border-color 140ms ease
+            transition border-color 140ms ease, transform 140ms ease
             will-change border-color
             padding 0 .5rem
         &:hover
-            transform translateY(-5px)
-
+            span
+                transform scale(1.15)
+                z-index 1000
 
     +below('m')
         flex-direction column
@@ -294,14 +300,21 @@ footer
             padding .5rem 0
             font-weight 500
         span
+            position relative
             content ' '
             width 4rem
             height 4rem
             display block
             margin 0 auto
             border-radius 50%
-            border 3px solid #fff
             padding 0 .5rem
+            border 2px solid transparent
+            transition border-color 140ms ease, transform 140ms ease
+            will-change border-color
+            cursor pointer
+            &:hover
+                transform scale(1.15)
+                z-index 1000
     &-more
         padding 3rem 0 2rem 0
         p + p
