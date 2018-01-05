@@ -47,14 +47,25 @@ class Timeline extends React.Component {
         const colorBlocks = this.renderColorBlocks(timelineData.shots);
         const id = Helpers.randomId();
 
-        return (
-            <div className="row shots" key={`${id}-${timelineData.date}`}>
+        const Shots = () => (
+            <div className="row shots">
                 <div className="col xs-12">
                     {timelineData.date && <DateTitle date={timelineData.date} />}
                 </div>
                 {colorBlocks}
             </div>
-        );
+        )
+
+        const Empty = () => (
+            <div className="row shots">
+                <div className="col xs-12">
+                    {timelineData.date && <DateTitle date={timelineData.date} />}
+                    <p className="empty">No data retrieved yet for this day, please check again later today :(</p>
+                </div>
+            </div>
+        )
+
+        return ( timelineData.shots.length > 0 ? <Shots key={`${id}-${timelineData.date}`} /> : <Empty key={`${id}-${timelineData.date}`} /> );
     }
 
     loadDate(date, custom) {
