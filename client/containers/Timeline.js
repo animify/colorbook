@@ -38,14 +38,6 @@ class Timeline extends React.Component {
         return true;
     }
 
-    componentWillReceiveProps(nextProps) {
-        const dateParam = nextProps.match.params.date;
-
-        if (dateParam !== undefined && dateParam !== this.state.currentDate) {
-            this.loadDate(dateParam, !!dateParam);
-        }
-    }
-
     copy(color) {
         this.props.show(color);
         Helpers.copy(color);
