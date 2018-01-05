@@ -37,7 +37,8 @@ class Endpoint {
         return new Promise((resolve, reject) => {
             const datedShots = this.db.shots.get(date);
             const shotsLength = datedShots.size().value();
-            const shouldResave = shotsLength === 0 || datedShots.value() === undefined || datedShots.value().shots.length === 0;
+            const shotsValue = datedShots.value() ? datedShots.value().shots : [];
+            const shouldResave = shotsLength === 0 || shotsValue === undefined || shotsValue.length < 12 || shotsValue.length === 0;
 
             if (shouldResave) {
                 this.dribbble

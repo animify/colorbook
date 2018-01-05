@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DocumentMeta from 'react-document-meta';
 
 import request from './../modules/Request';
@@ -14,6 +15,8 @@ class Homepage extends React.Component {
             shots: [],
             loading: false,
         };
+
+        this.copy = this.copy.bind(this);
     }
 
     componentDidMount() {
@@ -36,10 +39,15 @@ class Homepage extends React.Component {
             });
     }
 
+    copy(color) {
+        this.props.show(color);
+        Helpers.copy(color);
+    }
+
     renderColorBlocks(shots) {
         if (shots.length > 0) {
             return shots.map(shot => (
-                <ColorBlock key={shot.id} shot={shot} copy={Helpers.copy} />
+                <ColorBlock key={shot.id} shot={shot} copy={this.copy} />
             ));
         }
 
@@ -80,5 +88,9 @@ class Homepage extends React.Component {
         );
     }
 }
+
+Homepage.propTypes = {
+    show: PropTypes.func.isRequired
+};
 
 export default Homepage;

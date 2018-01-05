@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import request from './../modules/Request';
 import Helpers from './../modules/Helpers';
 import history from './../modules/History';
+import Profile from './../components/Profile';
 
 class Preview extends React.Component {
     constructor(props) {
@@ -14,6 +15,8 @@ class Preview extends React.Component {
             shot: [],
             loading: false,
         };
+
+        this.copy = this.copy.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +43,11 @@ class Preview extends React.Component {
                     history.push('/404');
                 }
             });
+    }
+
+    copy(color) {
+        this.props.show(color);
+        Helpers.copy(color);
     }
 
     render() {
@@ -98,15 +106,7 @@ class Preview extends React.Component {
                         </div>
                     </div>
                     <div className="row profile-colors">
-                        <div className="col xs-12">
-                            <p className="small-title">Color palette</p>
-                            {shot.colors && shot.colors.map(color => (
-                                <div className="color" key={color.substring(1)}>
-                                    <span style={{ backgroundColor: color }} />
-                                    <p>{ color }</p>
-                                </div>
-                            ))}
-                        </div>
+                        { shot.colors && <Profile shot={shot} copy={this.copy} /> }
                     </div>
                     <div className="row">
                         <div className="col xs-12">
@@ -133,6 +133,7 @@ class Preview extends React.Component {
 }
 
 Preview.propTypes = {
+    show: PropTypes.func.isRequired,
     match: PropTypes.shape({
         params: PropTypes.shape({
             id: PropTypes.node,

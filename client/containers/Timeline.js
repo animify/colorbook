@@ -16,13 +16,13 @@ class Timeline extends React.Component {
         this.state = {
             currentDate: null,
             loading: false,
-            copying: false,
             customDate: false,
             content: []
         };
 
         this.appendPreviousDay = this.appendPreviousDay.bind(this);
         this.renderColorBlocks = this.renderColorBlocks.bind(this);
+        this.copy = this.copy.bind(this);
     }
 
     componentDidMount() {
@@ -31,25 +31,41 @@ class Timeline extends React.Component {
         this.loadDate(dateParam, !!dateParam);
     }
 
-    componentWillReceiveProps(state) {
-        const dateParam = state.match.params.date;
-        if (dateParam !== this.state.currentDate) {
-            this.loadDate(dateParam, !!dateParam);
-        }
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.loading === this.state.loading)
+            return false;
+
+        return true;
+    }
+
+    copy(color) {
+        this.props.show(color);
+        Helpers.copy(color);
     }
 
     getTimelineBlock(timelineData) {
         const colorBlocks = this.renderColorBlocks(timelineData.shots);
         const id = Helpers.randomId();
 
-        return (
-            <div className="row shots" key={`${id}-${timelineData.date}`}>
+        const Shots = () => (
+            <div className="row shots">
                 <div className="col xs-12">
                     {timelineData.date && <DateTitle date={timelineData.date} />}
                 </div>
                 {colorBlocks}
             </div>
-        );
+        )
+
+        const Empty = () => (
+            <div className="row shots">
+                <div className="col xs-12">
+                    {timelineData.date && <DateTitle date={timelineData.date} />}
+                    <p className="empty">No data retrieved yet for this day, please check again later today :(</p>
+                </div>
+            </div>
+        )
+
+        return ( timelineData.shots.length > 0 ? <Shots key={`${id}-${timelineData.date}`} /> : <Empty key={`${id}-${timelineData.date}`} /> );
     }
 
     loadDate(date, custom) {
@@ -112,7 +128,7 @@ class Timeline extends React.Component {
     renderColorBlocks(shots) {
         if (shots.length > 0) {
             return shots.map(shot => (
-                <ColorBlock key={shot.id} shot={shot} copy={Helpers.copy} />
+                <ColorBlock key={shot.id} shot={shot} copy={this.copy} />
             ));
         }
 
@@ -159,7 +175,7 @@ class Timeline extends React.Component {
                                 </div>) :
                                 (<div role="presentation" onClick={this.appendPreviousDay} className="button dark loading">
                                     <div className="loader" />
-                                    <span>Analyzing shots from {currentDate}...</span>
+                                    <span>Analyzing shots from {moment(currentDate).subtract(1, 'day').format('YYYY-MM-DD')}...</span>
                                 </div>)
                             }
                         </div>
@@ -171,6 +187,7 @@ class Timeline extends React.Component {
 }
 
 Timeline.propTypes = {
+    show: PropTypes.func.isRequired,
     match: PropTypes.shape({
         params: PropTypes.shape({
             date: PropTypes.node,

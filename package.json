@@ -46,6 +46,7 @@
         "react-router-dom": "^4.2.2",
         "rupture": "^0.6.2",
         "socket.io": "^1.7.2",
+        "tinycolor2": "^1.4.1",
         "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony",
         "webcomponents.js": "^0.7.23",
         "webpack": "^3.5.6",
