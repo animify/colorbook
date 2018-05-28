@@ -1,4 +1,6 @@
-<a href="https://colorbook.me"><img src="https://cdn.darken.io/colorbook/github-backdrop.svg"></a>
+#### *Notice:* Deprecated due to new update to the new Dribbble API. Endpoints are no longer available. If available in the near future, this project will be revived. Thanks to all for your support.
+
+---
 
 # The Colorbook
 A day by day timeline of the most popular color palettes on Dribbble.
