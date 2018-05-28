@@ -7,9 +7,9 @@ const BasicRouter = () => (
     <Router history={history}>
         <div id="colorbook">
             {/* <Navbar /> */}
-            <div className="content">
-                <HomeRoute />
-            </div>
+            {/* <div className="content"> */}
+            <HomeRoute />
+            {/* </div> */}
             {/* <Footer /> */}
         </div>
     </Router>
