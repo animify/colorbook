@@ -1,24 +1,25 @@
 import Helpers from './common/helpers';
 
 class Endpoint {
-    constructor(db, dribbble) {
+    constructor(db, behance) {
         this.db = db;
-        this.dribbble = dribbble;
+        this.behance = behance;
     }
 
-    getPopularShots() {
+    getProjects(param, value) {
         return new Promise((resolve, reject) => {
-            const popularShots = this.db.shots.get('popular');
-            const shotsLength = popularShots.size().value();
-            const shouldResave = shotsLength === 0 || popularShots.value() === undefined || Helpers.lessThanOneHourAgo(popularShots.value().date);
+            const datedProjects = this.db.projects.get(`${param}:${value}`);
+            const projectsLength = datedProjects.size().value();
+            const projectsValue = datedProjects.value() ? datedProjects.value().projects : [];
+            const shouldResave = projectsLength === 0 || projectsValue === undefined || projectsValue.length < 12 || projectsValue.length === 0;
 
             if (shouldResave) {
-                this.dribbble
-                    .savePopularShots()
-                    .then((shots) => {
+                this.behance
+                    .saveProjects(param, value)
+                    .then((projects) => {
                         resolve({
                             success: true,
-                            content: shots
+                            content: projects
                         });
                     })
                     .catch((errObject) => {
@@ -27,62 +28,34 @@ class Endpoint {
             } else {
                 resolve({
                     success: true,
-                    content: popularShots
+                    content: datedProjects
                 });
             }
         });
     }
 
-    getShotsByDate(date) {
+    getProjectById(id) {
         return new Promise((resolve, reject) => {
-            const datedShots = this.db.shots.get(date);
-            const shotsLength = datedShots.size().value();
-            const shotsValue = datedShots.value() ? datedShots.value().shots : [];
-            const shouldResave = shotsLength === 0 || shotsValue === undefined || shotsValue.length < 12 || shotsValue.length === 0;
+            const dbValue = this.db.projects.value();
+            const projectId = Number(id);
 
-            if (shouldResave) {
-                this.dribbble
-                    .saveShotsByDate(date)
-                    .then((shots) => {
-                        resolve({
-                            success: true,
-                            content: shots
-                        });
-                    })
-                    .catch((errObject) => {
-                        reject(errObject);
-                    });
-            } else {
-                resolve({
-                    success: true,
-                    content: datedShots
-                });
-            }
-        });
-    }
+            if (!isNaN(projectId)) {
+                const displayProject = Object.keys(dbValue).map((key) => {
+                    const projects = dbValue[key].projects;
+                    const foundProject = projects.find(project => project.id === projectId);
+                    return foundProject;
+                }).find(project => project !== undefined);
 
-    getShotById(id) {
-        return new Promise((resolve, reject) => {
-            const dbValue = this.db.shots.value();
-            const shotId = Number(id);
-
-            if (!isNaN(shotId)) {
-                const displayShot = Object.keys(dbValue).map((key) => {
-                    const shots = dbValue[key].shots;
-                    const foundShot = shots.find(shot => shot.id === shotId);
-                    return foundShot;
-                }).find(shot => shot !== undefined);
-
-                if (displayShot) {
+                if (displayProject) {
                     resolve({
                         success: true,
-                        content: displayShot
+                        content: displayProject
                     });
                 } else {
-                    reject(Helpers.buildError(404, 'Shoot! Shot could not be found.'));
+                    reject(Helpers.buildError(404, 'Shoot! Project could not be found.'));
                 }
             } else {
-                reject(Helpers.buildError(400, 'Oh no, shot ids can not be strings!'));
+                reject(Helpers.buildError(400, 'Oh no, project ids can not be strings!'));
             }
         });
     }

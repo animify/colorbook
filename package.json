@@ -1,7 +1,7 @@
 {
     "name": "colorbook",
     "version": "1.0.0",
-    "description": "Color directory for Dribbble",
+    "description": "Color directory for Behance",
     "main": "server/server.js",
     "scripts": {
         "start:server": "webpack --config  webpack.config.server.js",
@@ -12,7 +12,7 @@
         "production": "./node_modules/babel-cli/bin/babel-node.js --presets node6 ./server/server",
         "eslint": "eslint ."
     },
-    "author": "Stefan Mansson <st.mansson@icloud.com> (http://mansson.io)",
+    "author": "Stefan Mansson <st.mansson@icloud.com> (https://mansson.io)",
     "license": "MIT",
     "dependencies": {
         "async": "^2.6.0",

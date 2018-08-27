@@ -6,30 +6,32 @@ import Helpers from './../modules/Helpers';
 const mouseEnter = (e) => {
     const style = e.target.style;
     style.borderColor = Helpers.borderColor(style.backgroundColor, true);
-}
+};
 
 const mouseLeave = (e) => {
     const style = e.target.style;
     style.borderColor = Helpers.borderColor(style.backgroundColor, false);
-}
+};
 
-const ColorBlock = ({ copy, shot }) => (
+const ColorBlock = ({ copy, project }) => (
     <div className="col xs-12 color-col">
         <div className="color-block">
             <div className="description">
-                <div className="inline">
-                    <img className="avatar" src={shot.user_avatar} height="54" alt={shot.user_name} />
-                </div>
-                <div className="inline">
-                    <h5><Link to={`/s/${shot.id}`}>{ shot.title }</Link></h5>
-                    <a href={shot.user_url}>@{ shot.user_name } {shot.user_pro && (<span className="user-pro">pro</span>)}</a>
+                <img className="avatar" src={project.imageUrl} height="60" alt={project.user_name} />
+                <div className="meta">
+                    <h5><Link to={project.url}>{project.title}</Link></h5>
+                    <p className="owners">
+                        {project.owners.map(owner => (
+                            <a key={owner.username} href={owner.profile}>@{owner.username}</a>
+                        ))}
+                    </p>
                 </div>
             </div>
             <div className="colors">
-                {shot.colors.map((color, i) => (
-                    <div className="color tooltip" role="presentation" key={color.substring(1)} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny" onClick={() => copy(color)}>
+                {project.colors.map(color => (
+                    <div className="color tooltip" role="presentation" key={color} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny" onClick={() => copy(color)}>
                         <span onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
-                        <p>{ color }</p>
+                        <p>{color}</p>
                     </div>
                 ))}
             </div>
@@ -39,7 +41,7 @@ const ColorBlock = ({ copy, shot }) => (
 
 ColorBlock.propTypes = {
     copy: PropTypes.func.isRequired,
-    shot: PropTypes.shape({
+    project: PropTypes.shape({
         id: PropTypes.number,
         imageUrl: PropTypes.string,
         url: PropTypes.string,

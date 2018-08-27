@@ -23,7 +23,7 @@ class Navbar extends React.Component {
             validSearchValue: true,
             searchValueError: 'Oops, please use a YYYY-MM-DD date format',
             searching: false,
-            currentPath: this.getPath(history.location) || ''
+            currentPath: location.pathname
         };
     }
 
@@ -45,14 +45,10 @@ class Navbar extends React.Component {
         this.listenToPath();
     }
 
-    getPath(location) {
-        return location.pathname.split('/').filter(pathname => pathname !== '')[0];
-    }
-
     listenToPath() {
         history.listen((location) => {
             this.setState({
-                currentPath: this.getPath(location) || ''
+                currentPath: location.pathname
             });
         });
     }
@@ -126,7 +122,7 @@ class Navbar extends React.Component {
                             <form action="/" onSubmit={this.goToTimeline}>
                                 <div className="input transparent">
                                     <span className={validSearchValue ? 'tooltip closed' : 'tooltip open invalid'} data-content={errorMessage} data-position="bottom left" data-text="small">
-                                        { isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder={`Jump to date e.g ${moment().format('YYYY-MM-DD')}...`} onChange={this.isTyping} value={searchValue} />)}
+                                        {isSearching && (<input ref={input => input && input.focus()} autoComplete="off" type="text" name="jumpto" spellCheck={false} onBlur={this.disableSearch} placeholder={`Jump to date e.g ${moment().format('YYYY-MM-DD')}...`} onChange={this.isTyping} value={searchValue} />)}
 
                                         <label htmlFor="jumpto" className="float-left">
                                             <div onClick={this.disableSearch} role="presentation" className={!isSearching ? 'hidden' : ''}>
@@ -143,10 +139,16 @@ class Navbar extends React.Component {
                     </ul>
                     <ul className="list horizontal float-right">
                         <li>
-                            <Link className={currentPath === '' ? 'active' : ''} to="/">Most popular</Link>
+                            <Link className={currentPath === '/' ? 'active' : ''} to="/">All</Link>
                         </li>
                         <li>
-                            <Link className={currentPath === 'timeline' ? 'active' : ''} to="/timeline">Timeline</Link>
+                            <Link className={currentPath === '/time/today' ? 'active' : ''} to="/time/today">Today</Link>
+                        </li>
+                        <li>
+                            <Link className={currentPath === '/time/week' ? 'active' : ''} to="/time/week">Week</Link>
+                        </li>
+                        <li>
+                            <Link className={currentPath === '/time/month' ? 'active' : ''} to="/time/month">Month</Link>
                         </li>
                     </ul>
                 </div>
