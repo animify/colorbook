@@ -40,11 +40,7 @@ class Endpoint {
             const projectId = Number(id);
 
             if (!isNaN(projectId)) {
-                const displayProject = Object.keys(dbValue).map((key) => {
-                    const projects = dbValue[key].projects;
-                    const foundProject = projects.find(project => project.id === projectId);
-                    return foundProject;
-                }).find(project => project !== undefined);
+                const displayProject = Object.keys(dbValue).reduce((a, key) => [...a, ...dbValue[key].projects], []).find(a => projectId === a.id);
 
                 if (displayProject) {
                     resolve({

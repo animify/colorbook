@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import DocumentMeta from 'react-document-meta';
 
 import request from './../modules/Request';
 import Helpers from './../modules/Helpers';
 import Intro from './../components/Intro';
-import ColorBlock from './../components/ColorBlock';
+import ProjectItem from './../components/ProjectItem';
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -48,10 +48,10 @@ class Homepage extends React.Component {
         Helpers.copy(color);
     }
 
-    renderColorBlocks(projects) {
-        if (projects.length > 0) {
+    renderProjectItems(projects) {
+        if (projects && projects.length > 0) {
             return projects.map(project => (
-                <ColorBlock key={project.id} project={project} copy={this.copy} />
+                <ProjectItem key={project.id} project={project} copy={this.copy} />
             ));
         }
 
@@ -60,7 +60,8 @@ class Homepage extends React.Component {
 
     render() {
         const projects = this.state.projects;
-        const colorBlocks = this.renderColorBlocks(projects);
+        const featuredProject = projects[3] || null;
+        const projectItems = this.renderProjectItems(projects);
         const isLoading = this.state.loading;
         const meta = {
             title: 'The Colorbook',
@@ -77,14 +78,23 @@ class Homepage extends React.Component {
         return (
             <section className="contain">
                 <DocumentMeta {...meta} />
-                <div className="row">
-                    <div className="col xs-12">
-                        <Intro message="The latest &amp; most popular color palettes trending on Behance right now." />
-                    </div>
+                {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
+                <div className="featured">
+                    {featuredProject &&
+                        <Fragment>
+                            <small className="label">Featured Project</small>
+                            <div className="preview" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }}>
+                                <div className="description">
+                                    <h1 className="title">{featuredProject.title}</h1>
+                                    <div className="owners">{featuredProject.owners.map(o => <span key={o.username}>@{o.username}</span>)}</div>
+                                </div>
+                            </div>
+                        </Fragment>
+                    }
                 </div>
-                <div className="row projects">
+                <div className="projects">
                     {!isLoading ?
-                        colorBlocks :
+                        projectItems :
                         (<div className="loader small" />)
                     }
                 </div>

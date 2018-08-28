@@ -14,12 +14,12 @@ class About extends React.Component {
     render() {
         const meta = {
             title: 'About - The Colorbook',
-            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
             canonical: `${Helpers.url}/about`,
             meta: {
                 charset: 'utf-8',
                 name: {
-                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
+                    keywords: 'colorbook,behance,color,palette,homepage,timeline'
                 }
             }
         };
@@ -29,10 +29,10 @@ class About extends React.Component {
                 <DocumentMeta {...meta} />
                 <div className="row">
                     <div className="col xs-12">
-                        <Intro title="About" message="A day by day timeline of the most popular color palettes on Dribbble." />
+                        <Intro title="About" message="A day by day timeline of the most popular color palettes on Behance." />
                     </div>
                     <div className="col xs-12">
-                        <h5>The Colorbook was created as a solution to discovering the awesome color schemes used in shots on Dribbble, which is incredibly tedious in its current state. With The Colorbook, color trends can effortlessly be compared on a day to day basis, or even fall back into time using the timeline.</h5>
+                        <h5>The Colorbook was created as a solution to discovering the awesome color schemes used in shots on Behance, which is incredibly tedious in its current state. With The Colorbook, color trends can effortlessly be compared on a day to day basis, or even fall back into time using the timeline.</h5>
                         <ul className="list dashed about-links">
                             <li className="item">
                                 Built by <a href="https://mansson.io">@animify</a>

@@ -34,24 +34,23 @@ if (process.env.NODE_ENV === 'development') {
     }));
 }
 
-
-app.get('/api/:param/:value', (req, res) => {
-    endpoint
-        .getProjects(req.params.param, req.params.value).then((projects) => {
-            res.send(projects);
-        });
-});
-
 app.get('/api/project/:id', (req, res) => {
     const id = req.params.id;
 
     endpoint
-        .getShotById(id)
+        .getProjectById(id)
         .then((projectObject) => {
             res.send(projectObject);
         })
         .catch((projectObject) => {
             res.send(projectObject);
+        });
+});
+
+app.get('/api/:param/:value', (req, res) => {
+    endpoint
+        .getProjects(req.params.param, req.params.value).then((projects) => {
+            res.send(projects);
         });
 });
 

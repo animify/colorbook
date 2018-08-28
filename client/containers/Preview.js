@@ -12,8 +12,8 @@ class Preview extends React.Component {
         super(props);
 
         this.state = {
-            shot: [],
-            loading: false,
+            project: null,
+            loading: true,
         };
 
         this.copy = this.copy.bind(this);
@@ -27,17 +27,14 @@ class Preview extends React.Component {
     getData() {
         const id = this.props.match.params.id;
 
-        this.setState({
-            loading: true
-        });
-
         request
-            .get(`/api/shot/${id}`)
+            .get(`/api/project/${id}`)
             .then((response) => {
+                console.log(response);
                 if (response.data.success) {
                     this.setState({
                         loading: false,
-                        shot: response.data.content
+                        project: response.data.content
                     });
                 } else {
                     history.push('/404');
@@ -51,24 +48,15 @@ class Preview extends React.Component {
     }
 
     render() {
-        const shot = this.state.shot;
+        const project = this.state.project;
         const isLoading = this.state.loading;
-        const meta = {
-            title: `${shot.title} - The Colorbook`,
-            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
-            canonical: `${Helpers.url}/${shot.id}`,
-            meta: {
-                charset: 'utf-8',
-                name: {
-                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
-                }
-            }
-        };
 
+
+        console.log(isLoading);
+    
         if (isLoading) {
             return (
                 <section className="profile-contain loading">
-                    <DocumentMeta {...meta} />
                     <div className="row">
                         <div className="col xs-12">
                             <div className="description">
@@ -80,6 +68,18 @@ class Preview extends React.Component {
             );
         }
 
+        const meta = {
+            title: `${project.title} - The Colorbook`,
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
+            canonical: `${Helpers.url}/${project.id}`,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'colorbook,behance,color,palette,homepage,timeline'
+                }
+            }
+        };
+        
         return (
             <section className="profile-contain">
                 <DocumentMeta {...meta} />
@@ -88,25 +88,26 @@ class Preview extends React.Component {
                         <div className="col xs-12">
                             <div className="description">
                                 <div className="inline">
-                                    <img className="avatar" src={shot.user_avatar} height="66" alt="User avatar" />
-                                </div>
-                                <div className="inline">
-                                    <h3>{shot.title}</h3>
-                                    <a href={shot.user_url}>@{ shot.user_name } {shot.user_pro && (<span className="user-pro">pro</span>)}</a>
+                                    <h3>{project.title}</h3>
+                                    <p className="owners">
+                                        {project.owners.map(owner => (
+                                            <a key={owner.username} href={owner.profile}>@{owner.username}</a>
+                                        ))}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col xs-12">
-                            <div className="profile-shot">
-                                <p className="small-title">Original shot</p>
-                                <img src={shot.imageUrlHidpi} alt={`${shot.title} shot`} />
+                            <div className="profile-project">
+                                <p className="small-title">Original project</p>
+                                <img src={project.imageUrlHidpi} alt={`${project.title} project`} />
                             </div>
                         </div>
                     </div>
                     <div className="row profile-colors">
-                        { shot.colors && <Profile shot={shot} copy={this.copy} /> }
+                        {project.colors && <Profile project={project} copy={this.copy} />}
                     </div>
                     <div className="row">
                         <div className="col xs-12">
@@ -114,11 +115,11 @@ class Preview extends React.Component {
                                 <p className="small-title">More options</p>
                                 <ul className="list dashed">
                                     <li className="item">
-                                        <a href={shot.url}>See original shot on Dribbble</a>
+                                        <a href={project.url}>See original project on Behance</a>
                                     </li>
-                                    <li className="item">
-                                        <a href={shot.user_url}>Explore more shots by <strong>@{shot.user_name}</strong></a>
-                                    </li>
+                                    {/* <li className="item">
+                                        <a href={project.user_url}>Explore more projects by <strong>@{project.user_name}</strong></a>
+                                    </li> */}
                                     <li className="item">
                                         <span className="disabled">Download Adobe Photoshop (.aco) palette file <strong className="text yellow">(coming soon)</strong></span>
                                     </li>

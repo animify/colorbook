@@ -21,7 +21,7 @@ class Footer extends React.Component {
                         <div className="col xs-12 m-8">
                             <p><strong>&copy; The Colorbook 2018</strong></p>
                             <small>All information &amp; images are copyright of their respective owners.</small>
-                            <small className="muted">The Colorbook has no affiliation with Dribbble.</small>
+                            <small className="muted">The Colorbook has no affiliation with Behance.</small>
                         </div>
                         <div className="col xs-12 m-4">
                             <ul className="list">
