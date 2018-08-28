@@ -23,8 +23,8 @@ class Helpers {
         };
     }
 
-    static lessThanOneHourAgo(date) {
-        return moment(date).isBefore(moment().subtract(1, 'hours'));
+    static lessThanOneDayAgo(date) {
+        return moment(date).isBefore(moment().subtract(1, 'day'));
     }
 }
 

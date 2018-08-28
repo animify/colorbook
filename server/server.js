@@ -35,11 +35,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 
-app.get('/api/:param/:value', async (req, res) => {
-    const projects = await endpoint
-        .getProjects(req.params.param, req.params.value);
-
-    res.send(projects);
+app.get('/api/:param/:value', (req, res) => {
+    endpoint
+        .getProjects(req.params.param, req.params.value).then((projects) => {
+            res.send(projects);
+        });
 });
 
 app.get('/api/project/:id', (req, res) => {

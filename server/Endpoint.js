@@ -11,7 +11,7 @@ class Endpoint {
             const datedProjects = this.db.projects.get(`${param}:${value}`);
             const projectsLength = datedProjects.size().value();
             const projectsValue = datedProjects.value() ? datedProjects.value().projects : [];
-            const shouldResave = projectsLength === 0 || projectsValue === undefined || projectsValue.length < 12 || projectsValue.length === 0;
+            const shouldResave = projectsLength === 0 || projectsValue === undefined || projectsValue.length === 0 || Helpers.lessThanOneDayAgo(datedProjects.value().date);
 
             if (shouldResave) {
                 this.behance

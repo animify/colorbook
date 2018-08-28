@@ -28,7 +28,7 @@ class Behance {
                         .then((extractedProjects) => {
                             const datedProjects = {
                                 projects: extractedProjects,
-                                [param]: value
+                                date: moment()
                             };
 
                             this.db.projects
