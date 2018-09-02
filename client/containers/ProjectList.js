@@ -20,6 +20,8 @@ class Homepage extends React.Component {
         this.state = {
             projects: [],
             loading: false,
+            param: this.props.match.params.param,
+            value: this.props.match.params.value,
         };
 
         this.copy = this.copy.bind(this);
@@ -34,13 +36,14 @@ class Homepage extends React.Component {
     }
 
     getData() {
-        const time = `${this.props.match.params.param}/${this.props.match.params.value}` || 'time/all';
+        const { param, value } = this.state;
+        const search = `${param}/${value}` || 'time/all';
         this.setState({
             loading: true
         });
 
         request
-            .get(`/api/${time}`)
+            .get(`/api/${search}`)
             .then((response) => {
                 this.setState({
                     loading: false,
@@ -65,10 +68,10 @@ class Homepage extends React.Component {
     }
 
     render() {
-        const projects = this.state.projects;
+        const { projects, param, value } = this.state;
         const featuredProject = projects[0] || null;
+        const listLabel = param === 'time' ? `${value !== 'today' ? 'This ' : ''}${value}'s projects` : `${param} - ${value}`;
         const projectItems = this.renderProjectItems(projects);
-        const isLoading = this.state.loading;
         const meta = {
             title: 'The Colorbook',
             description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
@@ -101,7 +104,7 @@ class Homepage extends React.Component {
                             </div>
                         </OnVisible>
                         <OnVisible className="animate delay-240">
-                            <div className="label">Today&#39;s Projects</div>
+                            <div className="label">{listLabel}</div>
                             <div className="projects">
                                 {projectItems}
                             </div>

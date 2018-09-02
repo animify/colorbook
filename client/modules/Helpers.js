@@ -35,6 +35,16 @@ class Helpers {
         document.execCommand('copy');
         appRoot.removeChild(inputArea);
     }
+
+    static colorMouseEnter(e) {
+        const style = e.target.style;
+        style.borderColor = Helpers.borderColor(style.backgroundColor, true);
+    }
+
+    static colorMouseLeave(e) {
+        const style = e.target.style;
+        style.borderColor = Helpers.borderColor(style.backgroundColor, false);
+    }
 }
 
 export default Helpers;

@@ -4,17 +4,6 @@ import OnVisible from 'react-on-visible';
 import { Link } from 'react-router-dom';
 import Helpers from '../modules/Helpers';
 
-
-const mouseEnter = (e) => {
-    const style = e.target.style;
-    style.borderColor = Helpers.borderColor(style.backgroundColor, true);
-};
-
-const mouseLeave = (e) => {
-    const style = e.target.style;
-    style.borderColor = Helpers.borderColor(style.backgroundColor, false);
-};
-
 const ProjectItem = ({ copy, project }) => (
     <OnVisible className="animate item">
         <Link to={`/project/${project.id}`}>
@@ -28,7 +17,7 @@ const ProjectItem = ({ copy, project }) => (
         <div className="colors">
             {project.colors.map(color => (
                 <div className="color tooltip" role="presentation" key={color} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny" onClick={() => copy(color)}>
-                    <span onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
+                    <span onMouseEnter={Helpers.colorMouseEnter} onMouseLeave={Helpers.colorMouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
                     <p>{color}</p>
                 </div>
             ))}
