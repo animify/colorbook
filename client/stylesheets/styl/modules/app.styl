@@ -1,3 +1,6 @@
+.alert
+    display: none;
+
 nav
     display: flex;
     background-color: #000;
@@ -20,58 +23,132 @@ nav
 h5 a
     color: inherit;
 
+.label
+    background-color: #000;
+    color: #fff;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    width: -moz-max-content;
+    width: fit-content;
+    display: flex;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    align-items: center;
+    line-height: 1;
+    width: 180px;
+    justify-content: center;
+    height: 36px;
+
 .featured
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 640px;
-    margin-bottom: 40px;
+    margin-bottom: 72px;
 
-    small.label
-        background-color: #000;
-        color: #fff;
-        padding: 12px 16px;
-        margin-bottom: 16px;
-        width: -moz-max-content;
-        width: fit-content;
-        display: flex;
-        font-weight: 800;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        align-items: center;
-        line-height: 1;
+    & > a
+        display: block;
+        width: 100%;
+        height: 100%;
 
     .preview
         display: flex;
         flex-direction: column;
-        background-size: cover;
-        background-position: center center;
-        content: ' ';
         align-items: center;
-        height: 100%;
-        width: 100%;
-        position: relative;
+        height: 600px;
 
     .description
         absolute: bottom 24px left 24px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
 
     .title, .owners
-        background-color: #fff;
-        color: #000;
-        padding: 12px 16px;
         margin-top: 16px;
-        width: -moz-max-content;
+        padding: 12px 16px;
         width: fit-content;
+        width: -moz-max-content;
+
+.title, .owners
+    display: inline-flex;
+    background-color: #fff;
+    color: #000;
+    word-wrap: break-word;
+    word-break: normal;
+    max-width: 84%;
+    position: relative;
+    z-index: 200;
+    align-items: center;
+    line-height: 1.25;
+
+    a, p
+        width: 100%;
+        overflow: ellipsis;
+        color: #000;
+
+.description
+    opacity: 1;
+    transition: left 200ms ease, opacity 200ms ease;
+    will-change: left, opacity;
+    z-index: 100;
+
+.preview
+    position: relative;
+    background-size: 110%;
+    background-position: center center;
+    transition: background-size 200ms ease;
+    width: 100%;
+    content: ' ';
+    overflow: hidden;
+
+    &:after
+        opacity: 1;
+        display: block;
+        content: ' ';
+        absolute: top left;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, .24), rgba(0, 0, 0, 0) 50%);
+        z-index: 10;
+        transition: opacity 200ms ease;
+
+    &:hover
+        background-size: 100%;
+
+        & .description
+            opacity: 0;
+            left: -100%;
+
+        &:after
+            opacity: 0;
+
+.animate
+    transform: translateY(40px) translateZ(0);
+    transform-style: preserve-3d;
+    transform-origin: bottom center;
+    backface-visibility: hidden;
+    opacity: 0;
+    transition: transform 450ms ease, opacity 600ms ease;
+    width: 100%;
+    will-change: transform, opacity;
+
+    &.appear
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+
+.delay-240
+    transition-delay: 240ms;
 
 .projects
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 36px;
+    grid-gap: 24px;
     width: 100%;
 
-    img.preview
-        width: 100%;
+    .preview
+        height: 240px;
 
     .item, .description
         position: relative;
@@ -79,37 +156,23 @@ h5 a
     .item
         font-size: 0;
 
-    .meta
+        > a
+            position: relative;
+            display: flex;
+
+    .description
         width: 100%;
-        padding: 16px;
+        padding: 12px;
         absolute: bottom left;
-
-    .title, .owners
-        background-color: #fff;
-        padding: 8px 16px;
-        width: -moz-max-content;
-        width: fit-content;
-        display: flex;
-        font-size: 10px;
-        font-weight: 500;
-        align-items: center;
-        max-width: 90%;
-        color: #000;
-        letter-spacing: .4px;
-
-        a, p
-            width: 100%;
-            overflow: ellipsis;
-            color: #000;
 
     .owners
         margin-top: -16px;
 
     .title
         font-weight: 800;
-        padding: 12px 16px;
-        font-size: 11px;
+        padding: 8px 12px;
         text-transform: uppercase;
+        font-size: 11px;
         letter-spacing: 1.2px;
 
     .colors
@@ -136,7 +199,7 @@ h5 a
             height: 20px;
             display: block;
             margin: 0 auto;
-            transition: border-color 140ms ease, transform 140ms ease;
+            transition: border-color 200ms ease, transform 200ms ease;
             will-change: border-color;
             padding: 0 .5rem;
             transform-origin: center center;

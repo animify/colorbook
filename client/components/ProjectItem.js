@@ -1,7 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import OnVisible from 'react-on-visible';
 import { Link } from 'react-router-dom';
-import Helpers from './../modules/Helpers';
+import Helpers from '../modules/Helpers';
+
 
 const mouseEnter = (e) => {
     const style = e.target.style;
@@ -14,14 +16,15 @@ const mouseLeave = (e) => {
 };
 
 const ProjectItem = ({ copy, project }) => (
-    <div className="item">
-        <div className="description">
-            <img className="preview" src={project.imageUrl} alt={project.user_name} />
-            <div className="meta">
-                <div className="title"><Link to={`/project/${project.id}`}>{project.title}</Link></div>
-                {/* <div className="owners"><p>{project.owners.map(o => <Fragment key={o.username}>@{o.username} &nbsp;</Fragment>)}</p></div> */}
+    <OnVisible className="animate item">
+        <Link to={`/project/${project.id}`}>
+            <div className="preview" style={{ backgroundImage: `url(${project.imageUrl})` }}>
+                <div className="description">
+                    <div className="title">{project.title}</div>
+                    {/* <div className="owners"><p>{project.owners.map(o => <Fragment key={o.username}>@{o.username} &nbsp;</Fragment>)}</p></div> */}
+                </div>
             </div>
-        </div>
+        </Link>
         <div className="colors">
             {project.colors.map(color => (
                 <div className="color tooltip" role="presentation" key={color} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny" onClick={() => copy(color)}>
@@ -30,7 +33,7 @@ const ProjectItem = ({ copy, project }) => (
                 </div>
             ))}
         </div>
-    </div>
+    </OnVisible>
 );
 
 ProjectItem.propTypes = {

@@ -27,8 +27,8 @@ function COPY_HTML {
 }
 
 function DESTROY_DB {
-    rm -rf server/database/shots.json
-    touch server/database/shots.json
+    rm -rf server/database/projects.json
+    touch server/database/projects.json
     echo -e "\e[35m Database recreated. \033[0m"
 }
 

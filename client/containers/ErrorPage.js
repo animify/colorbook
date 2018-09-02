@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import minicons from 'minicons';
 
-import Intro from './../components/Intro';
+import Intro from '../components/Intro';
 
 class ErrorPage extends React.Component {
     componentDidMount() {

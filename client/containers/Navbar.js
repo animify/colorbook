@@ -3,8 +3,8 @@ import minicons from 'minicons';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import history from './../modules/History';
-import Helpers from './../modules/Helpers';
+import history from '../modules/History';
+import Helpers from '../modules/Helpers';
 import primaryLogo from '../images/colorbook-logo-primary.svg';
 
 class Navbar extends React.Component {
@@ -108,9 +108,6 @@ class Navbar extends React.Component {
 
     render() {
         const isSearching = this.state.searching;
-        const searchValue = this.state.searchValue;
-        const validSearchValue = this.state.validSearchValue;
-        const errorMessage = this.state.searchValueError;
         const currentPath = this.state.currentPath;
 
         return (

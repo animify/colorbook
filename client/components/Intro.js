@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const Intro = ({ message, title }) => (
     <div className="content-intro">
-        <small>{ title }</small>
-        <h1>{ message }</h1>
+        <small>{title}</small>
+        <h1>{message}</h1>
     </div>
 );
 

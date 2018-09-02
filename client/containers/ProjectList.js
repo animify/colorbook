@@ -1,11 +1,17 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import DocumentMeta from 'react-document-meta';
+import DocumentMeta from 'react-document-meta/dist';
+import OnVisible, { setDefaultProps } from 'react-on-visible';
+import { Link } from 'react-router-dom';
+import request from '../modules/Request';
+import Helpers from '../modules/Helpers';
+import Loader from '../components/Loader';
+import ProjectItem from '../components/ProjectItem';
 
-import request from './../modules/Request';
-import Helpers from './../modules/Helpers';
-import Intro from './../components/Intro';
-import ProjectItem from './../components/ProjectItem';
+setDefaultProps({
+    visibleClassName: 'appear',
+    percent: 1
+});
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -60,7 +66,7 @@ class Homepage extends React.Component {
 
     render() {
         const projects = this.state.projects;
-        const featuredProject = projects[3] || null;
+        const featuredProject = projects[0] || null;
         const projectItems = this.renderProjectItems(projects);
         const isLoading = this.state.loading;
         const meta = {
@@ -79,25 +85,29 @@ class Homepage extends React.Component {
             <section className="contain">
                 <DocumentMeta {...meta} />
                 {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
-                <div className="featured">
-                    {featuredProject &&
-                        <Fragment>
-                            <small className="label">Featured Project</small>
-                            <div className="preview" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }}>
-                                <div className="description">
-                                    <h1 className="title">{featuredProject.title}</h1>
-                                    <div className="owners">{featuredProject.owners.map(o => <span key={o.username}>@{o.username}</span>)}</div>
-                                </div>
+                {featuredProject ?
+                    <Fragment>
+                        <OnVisible className="animate">
+                            <div className="featured">
+                                <Link to={`/project/${featuredProject.id}`}>
+                                    <div className="label">Featured Project</div>
+                                    <div className="preview" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }}>
+                                        <div className="description">
+                                            <h1 className="title">{featuredProject.title}</h1>
+                                            <div className="owners">{featuredProject.owners.map(o => <span key={o.username}>@{o.username}</span>)}</div>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
-                        </Fragment>
-                    }
-                </div>
-                <div className="projects">
-                    {!isLoading ?
-                        projectItems :
-                        (<div className="loader small" />)
-                    }
-                </div>
+                        </OnVisible>
+                        <OnVisible className="animate delay-240">
+                            <div className="label">Today&#39;s Projects</div>
+                            <div className="projects">
+                                {projectItems}
+                            </div>
+                        </OnVisible>
+                    </Fragment>
+                    : <Loader />}
             </section>
         );
     }

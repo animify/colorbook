@@ -5,13 +5,15 @@ import App from './App';
 import './stylesheets/styl/blossom.styl';
 
 const appRoot = document.getElementById('app');
-const render = Component =>
+const render = (Component) => {
     ReactDOM.render(
         <AppContainer>
             <Component />
         </AppContainer>,
         appRoot
     );
+};
 
 render(App);
+
 if (module.hot) module.hot.accept('./App', () => render(App));
