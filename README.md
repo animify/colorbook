@@ -1,4 +1,4 @@
-#### *Notice:* Deprecated due to new update to the new Behance API. Endpoints are no longer available. If available in the near future, this project will be revived. Thanks to all for your support.
+#### *Notice:* Deprecated due to new update to the new Dribble API. Endpoints are no longer available. *New Behance version in progress.*
 
 ---
 
