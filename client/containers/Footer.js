@@ -72,6 +72,7 @@ class Footer extends React.Component {
                     <div className="meta">
                         <p><strong>&copy; The Colorbook 2018</strong></p>
                         <small>All information &amp; images are copyright of their respective owners.</small>
+                        <br />
                         <small className="muted">The Colorbook has no affiliation with Behance.</small>
                     </div>
                 </div>
