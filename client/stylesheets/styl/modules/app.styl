@@ -1,0 +1,334 @@
+.alert
+    display: none;
+
+nav
+    display: flex;
+    background-color: rgba(0, 0, 0, .86);
+    fixed: top left;
+    width: 100%;
+    padding: 12px 32px;
+    z-index: 2000;
+
+    .left
+        width: 50%;
+        flex-shrink: 1;
+        display: flex;
+        justify-content: flex-start;
+
+    .center
+        flex-shrink: 0;
+
+    .right
+        width: 50%;
+        flex-shrink: 1;
+        display: flex;
+        justify-content: flex-end;
+
+    a
+        color: #fff;
+        font-weight: 600;
+
+    & > *
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+h5 a
+    color: inherit;
+
+.label
+    background-color: #000;
+    color: #fff;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    width: -moz-max-content;
+    width: fit-content;
+    display: flex;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    align-items: center;
+    line-height: 1;
+    min-width: 180px;
+    justify-content: center;
+    height: 36px;
+
+.project-list
+    .headline
+        text-transform: capitalize;
+        margin-bottom: 24px;
+
+.featured
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 640px;
+    margin-bottom: 72px;
+
+    & > a
+        display: block;
+        width: 100%;
+        height: 100%;
+
+    .preview
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 600px;
+
+    .description
+        absolute: bottom 24px left 24px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+    .title, .owners
+        margin-top: 16px;
+        padding: 12px 16px;
+        width: fit-content;
+        width: -moz-max-content;
+
+    &.simple
+        height: auto;
+
+        .description
+            relative: top left;
+
+            .title
+                margin: 0;
+
+.title, .owners
+    display: inline-flex;
+    background-color: #fff;
+    color: #000;
+    word-wrap: break-word;
+    word-break: normal;
+    max-width: 84%;
+    position: relative;
+    z-index: 200;
+    align-items: center;
+    line-height: 1.25;
+
+    a, p
+        width: 100%;
+        overflow: ellipsis;
+        color: #000;
+
+.description
+    opacity: 1;
+    transition: left 200ms ease, opacity 200ms ease;
+    will-change: left, opacity;
+    z-index: 100;
+
+.preview
+    position: relative;
+    background-size: 110%;
+    background-position: center center;
+    transition: background-size 200ms ease;
+    width: 100%;
+    content: ' ';
+    overflow: hidden;
+    background-color: #f3f3f3;
+    background-repeat: none;
+
+    &:not(.simple):after
+        opacity: 1;
+        display: block;
+        content: ' ';
+        absolute: top left;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, .24), rgba(0, 0, 0, 0) 50%);
+        z-index: 10;
+        transition: opacity 200ms ease;
+
+    &:not(.simple):hover
+        background-size: 100%;
+
+        & .description
+            opacity: 0;
+            left: -100%;
+
+        &:after
+            opacity: 0;
+
+.animate
+    transform: translateY(40px) translateZ(0);
+    transform-style: preserve-3d;
+    transform-origin: bottom center;
+    backface-visibility: hidden;
+    opacity: 0;
+    transition: transform 450ms ease, opacity 600ms ease;
+    width: 100%;
+    will-change: transform, opacity;
+
+    &.noopacity
+        opacity: 1;
+
+    &.appear
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+
+.delay-240
+    transition-delay: 240ms;
+
+.projects
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 24px;
+    width: 100%;
+
+    .preview
+        height: 240px;
+
+    .item, .description
+        position: relative;
+
+    .item
+        font-size: 0;
+        transition: transform 200ms ease;
+        transform: scale(1);
+        transform-origin: center center;
+
+        > a
+            position: relative;
+            display: flex;
+
+        &:active
+            transform: scale(.9);
+
+    .description
+        width: 100%;
+        padding: 12px;
+        absolute: bottom left;
+
+    .owners
+        margin-top: -16px;
+
+    .title
+        font-weight: 800;
+        padding: 8px 12px;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 1.2px;
+
+.colors
+    display: flex;
+
+    .color
+        cursor: pointer;
+        flex-grow: 1;
+
+        &::before
+            margin-top: .9rem !important;
+
+        &::after
+            margin-top: 1.1rem !important;
+
+        p
+            padding: .5rem 0;
+            display: none;
+
+        span
+            content: ' ';
+            position: relative;
+            width: 100%;
+            height: 20px;
+            display: block;
+            margin: 0 auto;
+            transition: border-color 200ms ease, transform 200ms ease;
+            will-change: border-color;
+            padding: 0 .5rem;
+            transform-origin: center center;
+
+        &:hover
+            span
+                transform: scale(1.15);
+                z-index: 1000;
+
+    &.large
+        .color span
+            height: 36px;
+
+.project
+    .bg
+        position: relative;
+        content: ' ';
+        width: 100%;
+        height: 340px;
+        z-index: -1;
+
+        // &:after
+        // opacity: 1;
+        // display: block;
+        // content: ' ';
+        // absolute: top left;
+        // width: 100%;
+        // height: 100%;
+        // background-image: linear-gradient(to top, rgba(0, 0, 0, .24), rgba(0, 0, 0, 0) 50%);
+        // z-index: 10;
+        .inner
+            background-position: center;
+            filter: blur(48px);
+            height: 120%;
+            width: 120%;
+            background-size: 100%;
+            content: ' ';
+            absolute: top -10% left -10%;
+
+    .content
+        background-color: #ffffff;
+        width: 100%;
+        padding: 48px;
+        position: relative;
+
+.categories
+    margin-top: 24px;
+
+    .subheading
+        font-size: font-size-h3;
+        padding: 12px 0 24px;
+
+    h2
+        padding: 16px 0;
+
+        a
+            color: text-default;
+
+            &:hover
+                color: color-primary;
+
+footer
+    padding: 84px 0;
+
+    .contain
+        display: flex;
+        margin-top: 0;
+
+    .meta
+        margin-left: auto;
+        flex-grow: 1;
+        flex-shrink: 1;
+        text-align: center;
+        margin-top: 36px;
+
+    .list
+        flex-shrink: 0;
+
+        p.header
+            color: #000;
+            font-weight: 800;
+
+        a
+            color: text-default;
+            font-size: 16px;
+
+            &:hover
+                color: color-primary;
+
+        & + .list
+            margin-left: 80px;
+
+        &.right
+            margin-left: auto;

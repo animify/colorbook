@@ -12,13 +12,13 @@ const mouseLeave = (e) => {
     style.borderColor = Helpers.borderColor(style.backgroundColor, false);
 }
 
-const Profile = ({ copy, shot }) => (
+const Profile = ({ copy, project }) => (
     <div className="col xs-12 color-col">
         <p className="small-title">Color palette</p>
-        {shot.colors.map(color => (
+        {project.colors.map(color => (
             <div className="color" key={color.substring(1)}>
-                <span onClick={() => copy(color)} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
-                <p>{ color }</p>
+                <span role="presentation" onClick={() => copy(color)} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
+                <p>{color}</p>
             </div>
         ))}
     </div>
@@ -26,7 +26,7 @@ const Profile = ({ copy, shot }) => (
 
 Profile.propTypes = {
     copy: PropTypes.func.isRequired,
-    shot: PropTypes.shape({
+    project: PropTypes.shape({
         id: PropTypes.number,
         imageUrl: PropTypes.string,
         url: PropTypes.string,

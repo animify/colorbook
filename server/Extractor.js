@@ -1,49 +1,29 @@
-import getColors from 'get-image-colors';
-import Helpers from './common/helpers';
+import tinycolor from 'tinycolor2';
 
-class Extractor {
-    static extractColor(filepath) {
-        return new Promise(((resolve, reject) => {
-            getColors(filepath)
-                .then((colors) => {
-                    resolve(colors);
-                })
-                .catch((err) => {
-                    reject(Helpers.buildError(400, `Error retreiving colors on image. Details: ${err}`));
-                });
-        }));
+export default class Extractor {
+    static extractProjects(projects) {
+        const projectsData = projects.map(project => Extractor.mapData(project));
+        return Promise.all(projectsData);
     }
 
-    static extractShots(shots) {
-        const shotsData = shots.map(shot => Extractor.extractData(shot));
-        return Promise.all(shotsData);
-    }
-
-    static extractData(shot) {
+    static mapData(project) {
         const normalizedData = {
-            id: shot.id,
-            title: shot.title,
-            url: shot.html_url,
-            imageUrl: shot.images.normal,
-            imageUrlHidpi: shot.images.hidpi || shot.images.normal,
-            user_name: shot.user.username,
-            user_pro: shot.user.pro,
-            user_url: shot.user.html_url,
-            user_avatar: shot.user.avatar_url,
-            colors: []
+            id: project.id,
+            title: project.name,
+            url: project.url,
+            imageUrl: project.covers[404],
+            imageUrlHidpi: project.covers.original || project.covers[404],
+            owners: project.owners.map(owner => ({
+                first_name: owner.first_name,
+                last_name: owner.last_name,
+                username: owner.username,
+                display_name: owner.display_name,
+                location: owner.location,
+                profile: owner.url,
+            })),
+            colors: project.colors.map(color => tinycolor(color).toHexString())
         };
 
-        return new Promise(((resolve, reject) => {
-            Extractor.extractColor(normalizedData.imageUrl)
-                .then((colors) => {
-                    normalizedData.colors = colors.map(color => color.hex());
-                    resolve(normalizedData);
-                })
-                .catch((err) => {
-                    reject(Helpers.buildError(400, `Error extracting data from shot. Details: ${err}`));
-                });
-        }));
+        return normalizedData;
     }
 }
-
-export default Extractor;

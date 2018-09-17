@@ -4,7 +4,7 @@
 import express from 'express';
 import Webpack from 'webpack';
 
-import Dribbble from './Dribbble';
+import Behance from './Behance';
 import Endpoint from './Endpoint';
 import Db from './database/Db';
 import Helpers from './common/helpers';
@@ -12,8 +12,8 @@ import Helpers from './common/helpers';
 const path = require('path');
 
 const db = new Db();
-const dribbble = new Dribbble(db);
-const endpoint = new Endpoint(db, dribbble);
+const behance = new Behance(db);
+const endpoint = new Endpoint(db, behance);
 const app = express();
 
 app.use(express.static('static'));
@@ -34,35 +34,23 @@ if (process.env.NODE_ENV === 'development') {
     }));
 }
 
-
-app.get('/api/popular', (req, res) => {
-    endpoint
-        .getPopularShots()
-        .then((shotsObject) => {
-            res.send(shotsObject);
-        });
-});
-
-app.get('/api/timeline/:date', (req, res) => {
-    const date = req.params.date;
-
-    endpoint
-        .getShotsByDate(date)
-        .then((shotsObject) => {
-            res.send(shotsObject);
-        });
-});
-
-app.get('/api/shot/:id', (req, res) => {
+app.get('/api/project/:id', (req, res) => {
     const id = req.params.id;
 
     endpoint
-        .getShotById(id)
-        .then((shotObject) => {
-            res.send(shotObject);
+        .getProjectById(id)
+        .then((projectObject) => {
+            res.send(projectObject);
         })
-        .catch((shotObject) => {
-            res.send(shotObject);
+        .catch((projectObject) => {
+            res.send(projectObject);
+        });
+});
+
+app.get('/api/:param/:value', (req, res) => {
+    endpoint
+        .getProjects(req.params.param, req.params.value).then((projects) => {
+            res.send(projects);
         });
 });
 

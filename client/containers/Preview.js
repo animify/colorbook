@@ -1,7 +1,7 @@
 import React from 'react';
 import DocumentMeta from 'react-document-meta';
 import PropTypes from 'prop-types';
-
+import OnVisible from 'react-on-visible';
 import request from './../modules/Request';
 import Helpers from './../modules/Helpers';
 import history from './../modules/History';
@@ -12,32 +12,28 @@ class Preview extends React.Component {
         super(props);
 
         this.state = {
-            shot: [],
-            loading: false,
+            project: null,
+            loading: true,
         };
 
         this.copy = this.copy.bind(this);
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0);
         this.getData();
+        window.scrollTo(0, 0);
     }
 
     getData() {
         const id = this.props.match.params.id;
 
-        this.setState({
-            loading: true
-        });
-
         request
-            .get(`/api/shot/${id}`)
+            .get(`/api/project/${id}`)
             .then((response) => {
                 if (response.data.success) {
                     this.setState({
                         loading: false,
-                        shot: response.data.content
+                        project: response.data.content
                     });
                 } else {
                     history.push('/404');
@@ -51,24 +47,12 @@ class Preview extends React.Component {
     }
 
     render() {
-        const shot = this.state.shot;
+        const project = this.state.project;
         const isLoading = this.state.loading;
-        const meta = {
-            title: `${shot.title} - The Colorbook`,
-            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
-            canonical: `${Helpers.url}/${shot.id}`,
-            meta: {
-                charset: 'utf-8',
-                name: {
-                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
-                }
-            }
-        };
 
         if (isLoading) {
             return (
                 <section className="profile-contain loading">
-                    <DocumentMeta {...meta} />
                     <div className="row">
                         <div className="col xs-12">
                             <div className="description">
@@ -80,54 +64,43 @@ class Preview extends React.Component {
             );
         }
 
+        const meta = {
+            title: `${project.title} - The Colorbook`,
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
+            canonical: `${Helpers.url}/${project.id}`,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'colorbook,behance,color,palette,homepage,timeline'
+                }
+            }
+        };
+
         return (
-            <section className="profile-contain">
+            <section className="project">
                 <DocumentMeta {...meta} />
-                <div className="profile">
-                    <div className="row">
-                        <div className="col xs-12">
-                            <div className="description">
-                                <div className="inline">
-                                    <img className="avatar" src={shot.user_avatar} height="66" alt="User avatar" />
-                                </div>
-                                <div className="inline">
-                                    <h3>{shot.title}</h3>
-                                    <a href={shot.user_url}>@{ shot.user_name } {shot.user_pro && (<span className="user-pro">pro</span>)}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col xs-12">
-                            <div className="profile-shot">
-                                <p className="small-title">Original shot</p>
-                                <img src={shot.imageUrlHidpi} alt={`${shot.title} shot`} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row profile-colors">
-                        { shot.colors && <Profile shot={shot} copy={this.copy} /> }
-                    </div>
-                    <div className="row">
-                        <div className="col xs-12">
-                            <div className="profile-more">
-                                <p className="small-title">More options</p>
-                                <ul className="list dashed">
-                                    <li className="item">
-                                        <a href={shot.url}>See original shot on Dribbble</a>
-                                    </li>
-                                    <li className="item">
-                                        <a href={shot.user_url}>Explore more shots by <strong>@{shot.user_name}</strong></a>
-                                    </li>
-                                    <li className="item">
-                                        <span className="disabled">Download Adobe Photoshop (.aco) palette file <strong className="text yellow">(coming soon)</strong></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div className="bg">
+                    <div className="inner" style={{ backgroundImage: `url(${project.imageUrlHidpi})` }} />
                 </div>
-            </section>
+                <OnVisible className="animate noopacity contain project">
+                    <div className="featured simple">
+                        <div className="description">
+                            <h1 className="title">{project.title}</h1>
+                        </div>
+                        <div className="preview simple" style={{ backgroundImage: `url(${project.imageUrlHidpi})` }} />
+                        <div className="colors large">
+                            {project.colors.map(color => (
+                                <div className="color tooltip" role="presentation" key={color} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny">
+                                    <span onMouseEnter={Helpers.colorMouseEnter} onMouseLeave={Helpers.colorMouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
+                                    <p>{color}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
+                </OnVisible>
+            </section >
         );
     }
 }

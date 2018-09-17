@@ -32,16 +32,9 @@ class Timeline extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.loading === this.state.loading)
-            return false;
-
-        return true;
+        return nextState.loading !== this.state.loading;
     }
 
-    copy(color) {
-        this.props.show(color);
-        Helpers.copy(color);
-    }
 
     getTimelineBlock(timelineData) {
         const colorBlocks = this.renderColorBlocks(timelineData.shots);
@@ -54,7 +47,7 @@ class Timeline extends React.Component {
                 </div>
                 {colorBlocks}
             </div>
-        )
+        );
 
         const Empty = () => (
             <div className="row shots">
@@ -63,9 +56,14 @@ class Timeline extends React.Component {
                     <p className="empty">No data retrieved yet for this day, please check again later today :(</p>
                 </div>
             </div>
-        )
+        );
 
-        return ( timelineData.shots.length > 0 ? <Shots key={`${id}-${timelineData.date}`} /> : <Empty key={`${id}-${timelineData.date}`} /> );
+        return (timelineData.shots.length > 0 ? <Shots key={`${id}-${timelineData.date}`} /> : <Empty key={`${id}-${timelineData.date}`} />);
+    }
+
+    copy(color) {
+        this.props.show(color);
+        Helpers.copy(color);
     }
 
     loadDate(date, custom) {
@@ -141,15 +139,15 @@ class Timeline extends React.Component {
         const customDate = this.state.customDate;
         const currentDate = this.state.currentDate;
         const daysAgo = Helpers.daysAgo(currentDate);
-        const message = (customDate && daysAgo > 0) ? `You've travelled back in time to the most popular palettes on Dribbble, ${daysAgo} ${daysAgo > 1 ? 'days' : 'day'} ago.` : 'A timeline of the most popular daily color palettes on Dribbble.';
+        const message = (customDate && daysAgo > 0) ? `You've travelled back in time to the most popular palettes on Behance, ${daysAgo} ${daysAgo > 1 ? 'days' : 'day'} ago.` : 'A timeline of the most popular daily color palettes on Behance.';
         const meta = {
             title: 'Timeline - The Colorbook',
-            description: 'The Colorbook creates and curates the most popular and trending color palettes on Dribbble everyday into an infinite timeline.',
+            description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
             canonical: `${Helpers.url}/timeline`,
             meta: {
                 charset: 'utf-8',
                 name: {
-                    keywords: 'colorbook,dribbble,color,palette,homepage,timeline'
+                    keywords: 'colorbook,behance,color,palette,homepage,timeline'
                 }
             }
         };
@@ -169,7 +167,7 @@ class Timeline extends React.Component {
                 <div className="row">
                     <div className="col xs-12">
                         <div className="previous-loader">
-                            { !isLoading ?
+                            {!isLoading ?
                                 (<div role="presentation" onClick={this.appendPreviousDay} className="button dark">
                                     Load previous day...
                                 </div>) :

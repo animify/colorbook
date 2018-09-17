@@ -3,11 +3,11 @@ import FileSync from 'lowdb/adapters/FileSync';
 
 class Db {
     constructor() {
-        this.shots = this.loadShotsDb();
+        this.projects = this.loadShotsDb();
     }
 
     loadShotsDb() {
-        const adapter = new FileSync('./server/database/shots.json');
+        const adapter = new FileSync('./server/database/projects.json');
         const db = low(adapter);
 
         return db;

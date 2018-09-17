@@ -65,4 +65,4 @@ build/dist/*.ttf
 build/dist/*.woff
 build/dist/*.woff2
 client/stylesheets/styl/fonts/*
-server/database/shots.json
+server/database/projects.json
