@@ -20,8 +20,8 @@ class Homepage extends React.Component {
         this.state = {
             projects: [],
             loading: false,
-            param: this.props.match.params.param,
-            value: this.props.match.params.value,
+            param: this.props.match.params.param || 'time',
+            value: this.props.match.params.value || 'all',
         };
 
         this.copy = this.copy.bind(this);
@@ -37,7 +37,7 @@ class Homepage extends React.Component {
 
     getData() {
         const { param, value } = this.state;
-        const search = `${param}/${value}` || 'time/all';
+        const search = `${param}/${value}`;
         this.setState({
             loading: true
         });
@@ -67,10 +67,13 @@ class Homepage extends React.Component {
         return [];
     }
 
+    e = (e) => {
+        console.log(e)
+    }
     render() {
         const { projects, param, value } = this.state;
         const featuredProject = projects[0] || null;
-        const listLabel = param === 'time' ? `${value !== 'today' ? 'This ' : ''}${value}'s projects` : `${param} - ${value}`;
+        const listLabel = param === 'time' ? `${!['all', 'today'].includes(value) ? 'This ' : ''}${value}${!['all'].includes(value) ? "'s" : ''} projects` : `${param} - ${value}`;
         const projectItems = this.renderProjectItems(projects);
         const meta = {
             title: 'The Colorbook',
@@ -85,8 +88,11 @@ class Homepage extends React.Component {
         };
 
         return (
-            <section className="contain">
+            <section className="contain project-list">
                 <DocumentMeta {...meta} />
+                <OnVisible className="animate" onChange={this.e}>
+                    <h1 className="headline">{listLabel}</h1>
+                </OnVisible>
                 {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
                 {featuredProject ?
                     <Fragment>
