@@ -54,6 +54,11 @@ h5 a
     justify-content: center;
     height: 36px;
 
+.project-list
+    .headline
+        text-transform: capitalize;
+        margin-bottom: 24px;
+
 .featured
     display: flex;
     flex-direction: column;
@@ -278,6 +283,22 @@ h5 a
         padding: 48px;
         position: relative;
 
+.categories
+    margin-top: 24px;
+
+    .subheading
+        font-size: font-size-h3;
+        padding: 12px 0 24px;
+
+    h2
+        padding: 16px 0;
+
+        a
+            color: text-default;
+
+            &:hover
+                color: color-primary;
+
 footer
     padding: 84px 0;
 
@@ -287,10 +308,10 @@ footer
 
     .meta
         margin-left: auto;
-        padding-left: 144px;
         flex-grow: 1;
         flex-shrink: 1;
-        text-align: right;
+        text-align: center;
+        margin-top: 36px;
 
     .list
         flex-shrink: 0;
@@ -298,13 +319,16 @@ footer
         p.header
             color: #000;
             font-weight: 800;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
 
         a
-            color: #000;
+            color: text-default;
             font-size: 16px;
 
+            &:hover
+                color: color-primary;
+
         & + .list
-            margin-left: 72px;
+            margin-left: 80px;
+
+        &.right
+            margin-left: auto;

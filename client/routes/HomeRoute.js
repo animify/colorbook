@@ -7,11 +7,13 @@ import Preview from '../containers/Preview';
 import ErrorPage from '../containers/ErrorPage';
 import Navbar from '../containers/Navbar';
 import Footer from '../containers/Footer';
+import Categories from '../components/Categories';
 
 const HomeRoute = () => (
     <Fragment>
         <Navbar />
         <Switch>
+            <Route exact path="/categories" component={wrapper(Categories)} />
             <Route exact path="/project/:id" component={wrapper(Preview)} />
             <Route exact path="/:param?/:value?" component={wrapper(ProjectList)} />
             <Route exact path="/404" component={wrapper(ErrorPage)} />
