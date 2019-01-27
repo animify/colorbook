@@ -10,7 +10,7 @@ import ProjectItem from '../components/ProjectItem';
 
 setDefaultProps({
     visibleClassName: 'appear',
-    percent: 1
+    percent: 1,
 });
 
 class Homepage extends React.Component {
@@ -39,17 +39,15 @@ class Homepage extends React.Component {
         const { param, value } = this.state;
         const search = `${param}/${value}`;
         this.setState({
-            loading: true
+            loading: true,
         });
 
-        request
-            .get(`/api/${search}`)
-            .then((response) => {
-                this.setState({
-                    loading: false,
-                    projects: response.data.content.projects
-                });
+        request.get(`/api/${search}`).then(response => {
+            this.setState({
+                loading: false,
+                projects: response.data.content.projects,
             });
+        });
     }
 
     copy(color) {
@@ -59,71 +57,88 @@ class Homepage extends React.Component {
 
     renderProjectItems(projects) {
         if (projects && projects.length > 0) {
-            return projects.map(project => (
-                <ProjectItem key={project.id} project={project} copy={this.copy} />
-            ));
+            return projects.map(project => <ProjectItem key={project.id} project={project} copy={this.copy} />);
         }
 
         return [];
     }
 
-    e = (e) => {
-        console.log(e)
-    }
+    e = e => {
+        console.log(e);
+    };
     render() {
         const { projects, param, value } = this.state;
-        const featuredProject = projects[0] || null;
-        const listLabel = param === 'time' ? `${!['all', 'today'].includes(value) ? 'This ' : ''}${value}${!['all'].includes(value) ? "'s" : ''} projects` : `${param} - ${value}`;
+        const featuredProject = projects[4] || null;
+        const listLabel =
+            param === 'time'
+                ? `${!['all', 'today'].includes(value) ? 'This ' : ''}${value}${!['all'].includes(value) ? "'s" : ''} projects`
+                : `${param} - ${value}`;
         const projectItems = this.renderProjectItems(projects);
         const meta = {
             title: 'The Colorbook',
-            description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
+            description:
+                'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
             canonical: Helpers.url,
             meta: {
                 charset: 'utf-8',
                 name: {
-                    keywords: 'colorbook,behance,color,palette,homepage,timeline'
-                }
-            }
+                    keywords: 'colorbook,behance,color,palette,homepage,timeline',
+                },
+            },
         };
 
         return (
-            <section className="contain project-list">
+            <Fragment>
                 <DocumentMeta {...meta} />
-                <OnVisible className="animate" onChange={this.e}>
-                    <h1 className="headline">{listLabel}</h1>
-                </OnVisible>
-                {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
-                {featuredProject ?
-                    <Fragment>
-                        <OnVisible className="animate">
-                            <div className="featured">
+                <div className="featured">
+                    {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
+                    {featuredProject ? (
+                        <Fragment>
+                            {/* <OnVisible className="animate description">
+                                <OnVisible className="animate" onChange={this.e}>
+                                    <h2 className="text primary">Featured</h2>
+                                    <h1 className="headline">{featuredProject.title}</h1>
+                                    <p>
+                                        {featuredProject.owners.map(o => (
+                                            <span key={o.username}>@{o.username}</span>
+                                        ))}
+                                    </p>
+                                </OnVisible>
+                            </OnVisible> */}
+                            <OnVisible className="animate">
                                 <Link to={`/project/${featuredProject.id}`}>
-                                    <div className="label">Featured Project</div>
-                                    <div className="preview" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }}>
-                                        <div className="description">
-                                            <h1 className="title">{featuredProject.title}</h1>
-                                            <div className="owners">{featuredProject.owners.map(o => <span key={o.username}>@{o.username}</span>)}</div>
-                                        </div>
-                                    </div>
+                                    <div className="preview simple" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }} />
                                 </Link>
-                            </div>
-                        </OnVisible>
-                        <OnVisible className="animate delay-240">
-                            <div className="label">{listLabel}</div>
-                            <div className="projects">
-                                {projectItems}
-                            </div>
-                        </OnVisible>
-                    </Fragment>
-                    : <Loader />}
-            </section>
+
+                                <div className="colors">
+                                    {featuredProject.colors.map(color => (
+                                        <div className="color" style={{ backgroundColor: color }} />
+                                    ))}
+                                </div>
+                            </OnVisible>
+                        </Fragment>
+                    ) : (
+                        <Loader />
+                    )}
+                </div>
+                <section className="project-list">
+                    <div className="bg">
+                        <div className="contain">
+                            <OnVisible className="animate delay-240">
+                                {/* <div className="label">{listLabel}</div> */}
+                                <h1 className="headline">{listLabel}</h1>
+                                <div className="projects">{projectItems}</div>
+                            </OnVisible>
+                        </div>
+                    </div>
+                </section>
+            </Fragment>
         );
     }
 }
 
 Homepage.propTypes = {
-    show: PropTypes.func.isRequired
+    show: PropTypes.func.isRequired,
 };
 
 export default Homepage;

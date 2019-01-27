@@ -7,12 +7,13 @@ export default class Extractor {
     }
 
     static mapData(project) {
+        console.log(project.covers);
         const normalizedData = {
             id: project.id,
             title: project.name,
             url: project.url,
             imageUrl: project.covers[404],
-            imageUrlHidpi: project.covers.original || project.covers[404],
+            imageUrlHidpi: project.covers.original || project.covers[808],
             owners: project.owners.map(owner => ({
                 first_name: owner.first_name,
                 last_name: owner.last_name,
