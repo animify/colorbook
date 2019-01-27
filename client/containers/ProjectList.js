@@ -63,9 +63,6 @@ class Homepage extends React.Component {
         return [];
     }
 
-    e = e => {
-        console.log(e);
-    };
     render() {
         const { projects, param, value } = this.state;
         const featuredProject = projects[4] || null;
@@ -94,17 +91,16 @@ class Homepage extends React.Component {
                     {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
                     {featuredProject ? (
                         <Fragment>
-                            {/* <OnVisible className="animate description">
-                                <OnVisible className="animate" onChange={this.e}>
-                                    <h2 className="text primary">Featured</h2>
+                            <div className="description">
+                                <OnVisible className="animate">
                                     <h1 className="headline">{featuredProject.title}</h1>
-                                    <p>
+                                    {/* <p>
                                         {featuredProject.owners.map(o => (
                                             <span key={o.username}>@{o.username}</span>
-                                        ))}
-                                    </p>
+                                            ))}
+                                        </p> */}
                                 </OnVisible>
-                            </OnVisible> */}
+                            </div>
                             <OnVisible className="animate">
                                 <Link to={`/project/${featuredProject.id}`}>
                                     <div className="preview simple" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }} />
