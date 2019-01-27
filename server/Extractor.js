@@ -1,4 +1,3 @@
-import tinycolor from 'tinycolor2';
 import getColors from 'get-image-colors';
 
 export default class Extractor {

@@ -22,16 +22,20 @@ if (process.env.NODE_ENV === 'development') {
     const config = require('../webpack.config.client');
     const compiler = Webpack(config);
 
-    app.use(require('webpack-dev-middleware')(compiler, {
-        noInfo: true,
-        publicPath: config.output.publicPath
-    }));
+    app.use(
+        require('webpack-dev-middleware')(compiler, {
+            noInfo: true,
+            publicPath: config.output.publicPath,
+        })
+    );
 
-    app.use(require('webpack-hot-middleware')(compiler, {
-        log: console.log,
-        path: '/__webpack_hmr',
-        heartbeat: 10 * 1000
-    }));
+    app.use(
+        require('webpack-hot-middleware')(compiler, {
+            log: console.log,
+            path: '/__webpack_hmr',
+            heartbeat: 10 * 1000,
+        })
+    );
 }
 
 app.get('/api/project/:id', (req, res) => {
@@ -39,19 +43,18 @@ app.get('/api/project/:id', (req, res) => {
 
     endpoint
         .getProjectById(id)
-        .then((projectObject) => {
+        .then(projectObject => {
             res.send(projectObject);
         })
-        .catch((projectObject) => {
+        .catch(projectObject => {
             res.send(projectObject);
         });
 });
 
 app.get('/api/:param/:value', (req, res) => {
-    endpoint
-        .getProjects(req.params.param, req.params.value).then((projects) => {
-            res.send(projects);
-        });
+    endpoint.getProjects(req.params.param, req.params.value).then(projects => {
+        res.send(projects);
+    });
 });
 
 if (process.env.NODE_ENV === 'development') {

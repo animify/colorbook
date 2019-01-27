@@ -11,24 +11,28 @@ class Endpoint {
             const datedProjects = this.db.projects.get(`${param}:${value}`);
             const projectsLength = datedProjects.size().value();
             const projectsValue = datedProjects.value() ? datedProjects.value().projects : [];
-            const shouldResave = projectsLength === 0 || projectsValue === undefined || projectsValue.length === 0 || Helpers.lessThanOneDayAgo(datedProjects.value().date);
+            const shouldResave =
+                projectsLength === 0 ||
+                projectsValue === undefined ||
+                projectsValue.length === 0 ||
+                Helpers.lessThanOneDayAgo(datedProjects.value().date);
 
             if (shouldResave) {
                 this.behance
                     .saveProjects(param, value)
-                    .then((projects) => {
+                    .then(projects => {
                         resolve({
                             success: true,
-                            content: projects
+                            content: projects,
                         });
                     })
-                    .catch((errObject) => {
+                    .catch(errObject => {
                         reject(errObject);
                     });
             } else {
                 resolve({
                     success: true,
-                    content: datedProjects
+                    content: datedProjects,
                 });
             }
         });
@@ -40,12 +44,14 @@ class Endpoint {
             const projectId = Number(id);
 
             if (!isNaN(projectId)) {
-                const displayProject = Object.keys(dbValue).reduce((a, key) => [...a, ...dbValue[key].projects], []).find(a => projectId === a.id);
+                const displayProject = Object.keys(dbValue)
+                    .reduce((a, key) => [...a, ...dbValue[key].projects], [])
+                    .find(a => projectId === a.id);
 
                 if (displayProject) {
                     resolve({
                         success: true,
-                        content: displayProject
+                        content: displayProject,
                     });
                 } else {
                     reject(Helpers.buildError(404, 'Shoot! Project could not be found.'));

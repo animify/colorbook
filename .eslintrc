@@ -1,25 +1,26 @@
 {
-    'extends': 'airbnb',
+    "extends": "airbnb",
     "env": {
         "browser": true,
         "node": true
     },
-    'settings': {
+    "settings": {
     },
-    'rules': {
-        'indent': [ 2, 4 ],
-        'consistent-return': 0,
-        'max-len': 0,
-        'comma-dangle': 0,
-        'func-names': 'off',
-        'class-methods-use-this': 'off',
-        'import/no-unresolved': 'off',
-        'import/no-dynamic-require': 'off',
-        'no-underscore-dangle': 'off',
-        'import/resolver': 'off',
+    "rules": {
+        "indent": [ 2, 4 ],
+        "consistent-return": 0,
+        "max-len": 0,
+        "comma-dangle": 0,
+        "arrow-parens": ["as-needed"],
+        "func-names": "off",
+        "class-methods-use-this": "off",
+        "import/no-unresolved": "off",
+        "import/no-dynamic-require": "off",
+        "no-underscore-dangle": "off",
+        "import/resolver": "off",
         "jsx-a11y/href-no-hash": "off",
         "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
-        "react/jsx-filename-extension": 'off',
+        "react/jsx-filename-extension": "off",
         "linebreak-style": 0,
         "react/jsx-indent": 0
     }
