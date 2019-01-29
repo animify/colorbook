@@ -27,18 +27,16 @@ class Preview extends React.Component {
     getData() {
         const id = this.props.match.params.id;
 
-        request
-            .get(`/api/project/${id}`)
-            .then((response) => {
-                if (response.data.success) {
-                    this.setState({
-                        loading: false,
-                        project: response.data.content
-                    });
-                } else {
-                    history.push('/404');
-                }
-            });
+        request.get(`/api/project/${id}`).then(response => {
+            if (response.data.success) {
+                this.setState({
+                    loading: false,
+                    project: response.data.content,
+                });
+            } else {
+                history.push('/404');
+            }
+        });
     }
 
     copy(color) {
@@ -66,14 +64,15 @@ class Preview extends React.Component {
 
         const meta = {
             title: `${project.title} - The Colorbook`,
-            description: 'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
+            description:
+                'The Colorbook creates and curates the most popular and trending color palettes on Behance everyday into an infinite timeline.',
             canonical: `${Helpers.url}/${project.id}`,
             meta: {
                 charset: 'utf-8',
                 name: {
-                    keywords: 'colorbook,behance,color,palette,homepage,timeline'
-                }
-            }
+                    keywords: 'colorbook,behance,color,palette,homepage,timeline',
+                },
+            },
         };
 
         return (
@@ -82,25 +81,34 @@ class Preview extends React.Component {
                 <div className="bg">
                     <div className="inner" style={{ backgroundImage: `url(${project.imageUrlHidpi})` }} />
                 </div>
-                <OnVisible className="animate noopacity contain project">
-                    <div className="featured simple">
+                <OnVisible className="animate noopacity contain">
+                    <div className="display">
                         <div className="description">
                             <h1 className="title">{project.title}</h1>
                         </div>
                         <div className="preview simple" style={{ backgroundImage: `url(${project.imageUrlHidpi})` }} />
-                        <div className="colors large">
+                        {/* <div className="colors large">
                             {project.colors.map(color => (
-                                <div className="color tooltip" role="presentation" key={color} data-content={`Copy ${color}`} data-position="bottom right" data-text="tiny">
-                                    <span onMouseEnter={Helpers.colorMouseEnter} onMouseLeave={Helpers.colorMouseLeave} style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }} />
+                                <div
+                                    className="color tooltip"
+                                    role="presentation"
+                                    key={color}
+                                    data-content={`Copy ${color}`}
+                                    data-position="bottom right"
+                                    data-text="tiny"
+                                >
+                                    <span
+                                        onMouseEnter={Helpers.colorMouseEnter}
+                                        onMouseLeave={Helpers.colorMouseLeave}
+                                        style={{ backgroundColor: color, borderColor: Helpers.borderColor(color, false) }}
+                                    />
                                     <p>{color}</p>
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
-
-
                 </OnVisible>
-            </section >
+            </section>
         );
     }
 }
@@ -111,7 +119,7 @@ Preview.propTypes = {
         params: PropTypes.shape({
             id: PropTypes.node,
         }).isRequired,
-    }).isRequired
+    }).isRequired,
 };
 
 export default Preview;

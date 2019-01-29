@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import DocumentMeta from 'react-document-meta/dist';
 import OnVisible, { setDefaultProps } from 'react-on-visible';
-import { Link } from 'react-router-dom';
 import request from '../modules/Request';
 import Helpers from '../modules/Helpers';
 import Loader from '../components/Loader';
 import ProjectItem from '../components/ProjectItem';
+import Featured from './Featured';
 
 setDefaultProps({
     visibleClassName: 'appear',
@@ -65,7 +65,7 @@ class Homepage extends React.Component {
 
     render() {
         const { projects, param, value } = this.state;
-        const featuredProject = projects[4] || null;
+        const featuredProject = projects[5] || null;
         const listLabel =
             param === 'time'
                 ? `${!['all', 'today'].includes(value) ? 'This ' : ''}${value}${!['all'].includes(value) ? "'s" : ''} projects`
@@ -87,36 +87,8 @@ class Homepage extends React.Component {
         return (
             <Fragment>
                 <DocumentMeta {...meta} />
-                <div className="featured">
-                    {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
-                    {featuredProject ? (
-                        <Fragment>
-                            <div className="description">
-                                <OnVisible className="animate">
-                                    <h1 className="headline">{featuredProject.title}</h1>
-                                    {/* <p>
-                                        {featuredProject.owners.map(o => (
-                                            <span key={o.username}>@{o.username}</span>
-                                            ))}
-                                        </p> */}
-                                </OnVisible>
-                            </div>
-                            <OnVisible className="animate">
-                                <Link to={`/project/${featuredProject.id}`}>
-                                    <div className="preview simple" style={{ backgroundImage: `url(${featuredProject.imageUrlHidpi})` }} />
-                                </Link>
-
-                                <div className="colors">
-                                    {featuredProject.colors.map(color => (
-                                        <div className="color" style={{ backgroundColor: color }} />
-                                    ))}
-                                </div>
-                            </OnVisible>
-                        </Fragment>
-                    ) : (
-                        <Loader />
-                    )}
-                </div>
+                {/* <Intro message="The latest &amp; most popular color palettes trending on Behance right now." /> */}
+                {featuredProject ? <Featured project={featuredProject} /> : <Loader />}
                 <section className="project-list">
                     <div className="bg">
                         <div className="contain">

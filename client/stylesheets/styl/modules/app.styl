@@ -4,13 +4,12 @@
 nav
     display: flex;
     background-color: #fff;
-    fixed: top left 10%;
-    width: 80%;
+    fixed: top left 0;
+    width: 100%;
     padding: 0 36px;
     z-index: 2000;
     height: 64px;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
 
     .left
         width: 50%;
@@ -58,78 +57,15 @@ h5 a
     height: 36px;
 
 .project-list
-    &:before
-        content: ' ';
-        height: 100vh;
-        min-height: 700px;
-        display: block;
-        width: 100%;
-
     .bg
         padding-top: 108px;
         width: 100%;
         background-color: #fff;
         position: relative;
-        box-shadow: 0 -2px 20px 12px rgba(0, 0, 0, .028);
 
 .headline
     text-transform: capitalize;
     margin-bottom: 24px;
-
-.featured
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: calc(100vh - 64px);
-    min-height: 700px;
-    position: fixed;
-    top: 0;
-
-    & > a
-        display: block;
-        width: 100%;
-        height: 100%;
-
-    .preview
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        background-size: cover;
-        background-repeat: no-repeat;
-
-    .colors
-        position: absolute;
-        bottom: -64px;
-        right: 0;
-        left: 0;
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 64px;
-
-        .color
-            height: 64px;
-            width: 20%;
-            content: ' ';
-            display: flex;
-
-    .description
-        absolute: top 66px left 10%;
-        width: 80%;
-        background-color: rgba(255, 255, 255, .92);
-        padding: 0 36px;
-        display: flex;
-        align-items: center;
-        height: 56px;
-
-        h1
-            margin: 0;
-            font-size: 24px;
-            line-height: 1;
-            font-weight: 800;
-            letter-spacing: 0;
 
 .description
     width: 100%;
@@ -312,8 +248,9 @@ h5 a
         position: relative;
         content: ' ';
         width: 100%;
-        height: 340px;
+        height: 700px;
         z-index: -1;
+        overflow: hidden;
 
         // &:after
         // opacity: 1;
@@ -338,6 +275,41 @@ h5 a
         width: 100%;
         padding: 48px;
         position: relative;
+
+    .display
+        display: flex;
+        background-color: #fff;
+        flex-direction: row;
+        width: 100%;
+        height: 700px;
+        margin-top: -450px;
+        z-index: 20;
+        position: relative;
+        margin-bottom: 120px;
+
+        .description
+            background-color: #fff;
+
+        &:before
+            background-color: color-primary;
+            width: 70%;
+            height: 70%;
+            absolute: top -24px left -24px;
+            content: ' ';
+            z-index: -1;
+
+        &:after
+            background-color: #000;
+            width: 70%;
+            height: 70%;
+            absolute: bottom -24px right -24px;
+            content: ' ';
+            z-index: -1;
+
+        .preview
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
 
 .categories
     margin-top: 124px;
