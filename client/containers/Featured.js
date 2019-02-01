@@ -13,10 +13,9 @@ export default function Featured({ project }) {
                         <OnVisible className="animate">
                             <h3 className="text primary">Palette of the day</h3>
                             <h1 className="headline">{project.title}</h1>
-                            <div className="authors">
-                                By &nbsp;
-                                {project.owners.map(o => (
-                                    <span key={o.username}>@{o.username}</span>
+                            <div className="colors">
+                                {project.colors.map(color => (
+                                    <div className="color" style={{ backgroundColor: color }} />
                                 ))}
                             </div>
                         </OnVisible>
@@ -26,9 +25,10 @@ export default function Featured({ project }) {
                     {/* <Link to={`/project/${project.id}`}> */}
                     <div className="preview simple" style={{ backgroundImage: `url(${project.imageUrlHidpi})` }} />
                     {/* </Link> */}
-                    <div className="colors">
-                        {project.colors.map(color => (
-                            <div className="color" style={{ backgroundColor: color }} />
+                    <div className="authors">
+                        By &nbsp;
+                        {project.owners.map(o => (
+                            <span key={o.username}>@{o.username}</span>
                         ))}
                     </div>
                 </OnVisible>

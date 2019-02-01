@@ -3,7 +3,7 @@
     flex-direction: row;
     width: 100%;
     position: relative;
-    margin-top: 112px;
+    margin: 100px 0 24px;
 
     .lbl
         margin-left: 28px;
@@ -11,7 +11,7 @@
         text-transform: uppercase;
         font-weight: 800;
         letter-spacing: 2.4px;
-        absolute: top 100px left;
+        absolute: top 64px left;
         color: #000;
 
         &:before
@@ -29,12 +29,13 @@
         height: 560px;
 
         .desc
-            padding: 100px 48px 0 0;
+            padding: 64px 48px 0 0;
 
         h1
             color: #000;
             font-weight: 800;
             letter-spacing: -2.4px;
+            margin: 6px 0 32px;
 
     .image
         width: 50%;
@@ -48,22 +49,28 @@
         font-weight: 600;
         font-size: 14px;
         width: fit-content;
+        absolute: bottom 48px right 48px;
 
     .colors
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 64px;
 
         .color
-            width: 20%;
-            height: 100%;
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
             content: ' ';
             flex-shrink: 1;
             flex-grow: 0;
+
+            + .color
+                margin-left: -20px;
 
     .preview
         height: 100%;
         width: 100%;
         background-size: cover;
         background-repeat: no-repeat;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, .16) 0 4px 12px;
